@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Patient's Medications</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ccd5e2;
+            margin: 20px;
+        }
+        .container {
+            border: 1px solid #0000FF; 
+            padding: 20px;
+            width: 80%;
+            max-width: 800px;
+            margin: auto;
+            background-color: rgb(202, 240, 233);
+            border-radius: 5px;
+        }
+        h2 {
+            text-align: center;
+            font-weight: bold;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 30%;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+        .gender-options, .medications-options {
+            margin-left: 20px;
+        }
+        .gender-options label, .medications-options label {
+            font-weight: normal;
+        }
+        button {
+            width: 20%;
+            padding: 10px;
+            background-color: #0000FF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #5858f8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Patient's Medications</h2>
+        <form action="#" method="post">
+            <div class="form-group">
+                <label for="patient-name">Patient's Name:</label>
+                <input type="text" id="patient-name" value="Noora" readonly>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" value="20" min="0">
+            </div>
+            <div class="form-group">
+                <label>Gender:</label>
+                <div class="gender-options">
+                    <label><input type="radio" name="gender" value="male"> Male</label><br>
+                    <label><input type="radio" name="gender" value="female" > Female</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Medications:</label>
+                <div class="medications-options">
+                    <label><input type="checkbox" name="medications" value="aspirin" > Aspirin</label><br>
+                    <label><input type="checkbox" name="medications" value="ibuprofen"> Ibuprofen</label><br>
+                    <label><input type="checkbox" name="medications" value="paracetamol"> Paracetamol</label><br>
+                    <label><input type="checkbox" name="medications" value="antibiotics"> Antibiotics</label>
+                </div>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
