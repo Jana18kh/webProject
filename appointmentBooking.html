@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Appointment Booking</title>
+  </head>
+  <body>
+    <h1>Book an Appointment</h1>
+    <form action="" id="specialty">
+      <label for="specialtyOptions">Select Specialty:</label>
+      <select id="specialtyOptions" required>
+        <option value="" disabled>Select Specialty</option>
+        <option value="cardiology">Cardiology</option>
+        <option value="neurology">Neurology</option>
+        <option value="pediatrics">Pediatrics</option>
+        <option value="orthopedics">Orthopedics</option>
+        <option value="dermatology">Dermatology</option>
+        <option value="psychiatry">Psychiatry</option>
+        <option value="oncology">Oncology</option>
+        <option value="gynecology">Gynecology</option>
+      </select>
+      <button type="submit">Submit</button><br />
+    </form><br>
+    <form action="" id="appointmentBooking">
+      <label for="doctor">Select Doctor: </label>
+      <select id="doctor" required>
+        <option value="" disabled>Choose Doctor</option>
+      </select>
+      <br /><br>
+      <label for="date">Select Date: </label>
+      <input type="date" name="date" /><br /><br>
+      <label for="time">Select Time: </label>
+      <input type="time" name="time" /><br /><br>
+      <label for="reason"
+        >Reason for Visit: <br><textarea name="reason" rows="4"></textarea></label
+      ><br /><br>
+      <button type="submit">Submit Booking</button>
+    </form>
+
+    <script>
+      const specialtyDoctors = {
+        cardiology: ["Dr. Mona", "Dr. Omar", "Dr. Salma"],
+        neurology: ["Dr. Khalid ", "Dr. Hadi", "Dr. Majed"],
+        pediatrics: ["Dr. Sami", "Dr. Fatima", "Dr. Ali"],
+        orthopedics: ["Dr. Ibrahim", "Dr. Hassan", "Dr. Nasser"],
+        dermatology: ["Dr. Ahmad", "Dr. Taraf", "Dr. Majd"],
+        psychiatry: ["Dr. Reem", "Dr. Fares", "Dr. Manar"],
+        oncology: ["Dr. Tariq", "Dr. Fares", "Dr. Mohammad"],
+        gynecology: ["Dr. Amal", "Dr. Nora", "Dr. Sara"],
+      };
+
+      document
+        .getElementById("specialtyOptions")
+        .addEventListener("change", displayDoctors);
+
+      function displayDoctors() {
+        const selectedSpecialty =
+          document.getElementById("specialtyOptions").value;
+        let doctorOptions = `<option value="" disabled selected>Choose Doctor</option>`;
+        if (specialtyDoctors[selectedSpecialty]) {
+          for (let i = 0; i < specialtyDoctors[selectedSpecialty].length; i++) {
+            doctorOptions += `<option value="${specialtyDoctors[selectedSpecialty][i]}">${specialtyDoctors[selectedSpecialty][i]}</option>`;
+          }
+        }
+        document.getElementById("doctor").innerHTML = doctorOptions;
+      }
+    </script>
+  </body>
+</html>
