@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor's Homepage</title>
+  </head>
+  <body>
+    <div style="display: flex; justify-content: space-between;">
+        <h1>Welcome Dr. Mona</h1>
+        <a href="/homepage">Log out</a>
+    </div>
+   
+    <div
+      style="
+        border: 1px solid black;
+        display: flex;
+        justify-content: space-between;
+      "
+    >
+      <div id="info">
+        <p>First name: <b id="firstName">Sara</b></p>
+        <p>Last name: <b id="firstName">Khalid</b></p>
+        <p>ID: <b id="ID">55241</b></p>
+        <p>Email Address: <b id="email">dr.sara@gmail.com</b></p>
+      </div>
+      <div>
+        <img src="doctor.jpg" alt="Mona's photo" width="200" height="150" />
+      </div>
+    </div>
+    <h2>Upcoming Appointment</h2>
+    <table style="width: 100%; border: 1px solid black; text-align: center">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Patient's Name</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Reason for visit</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>23/2/2025</td>
+          <td>11 AM</td>
+          <td>Nora Saad</td>
+          <td>15</td>
+          <td>Female</td>
+          <td>Headache</td>
+          <td id="status"><span class="status">pending</span></td>
+        </tr>
+        <tr>
+          <td>16/7/2025</td>
+          <td>5 PM</td>
+          <td>Majed Ahmad</td>
+          <td>45</td>
+          <td>Male</td>
+          <td>Back pain</td>
+          <td><span class="status">Confimed</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <h2>Your Patients</h2>
+    <table style="width: 100%; border: 1px solid black; text-align: center">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Medications</th>
+        </tr>
+      </thead>
+      <tbody id="patients"></tbody>
+    </table>
+    <script>
+      const patients = [
+        { name: "Majed saleh", age: 35, gender: "Male", medications: "N/A" },
+        {
+          name: "Leena Naser",
+          age: 40,
+          gender: "Female",
+          medications: "Antibiotics",
+        },
+      ];
+
+      patients.sort(function (patient1, patient2) {
+        if (patient1.name > patient2.name) {
+          return 1;
+        } else if (patient1.name < patient2.name) {
+          return -1;
+        }
+      });
+
+      patients.forEach(function (patient) {
+        const sorted = `
+        <tr >
+          <td>${patient.name}</td>
+          <td>${patient.age}</td>
+          <td>${patient.gender}</td>
+          <td >${patient.medications}</td>
+          <td><a href="">Prescribe</a></td>
+        </tr>
+      `;
+        document.getElementById("patients").innerHTML += sorted;
+      });
+
+      function status() {
+        const allStatus = document.getElementsByClassName("status");
+        for (let i = 0; i < allStatus.length; i++) {
+          if (allStatus[i].textContent.trim() === "pending") {
+            allStatus[i].innerHTML =
+              '<button type="button" onclick="">Confirm</button>';
+          }
+        }
+      }
+      window.onload = status;
+    </script>
+  </body>
+</html>
