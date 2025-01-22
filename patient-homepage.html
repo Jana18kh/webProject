@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Homepage</title>
 </head>
 <body>
-
+    <header>
+        <img src="logo.jpg" alt="CureGo Clinic Logo" class="logo">
+        <h1>Welcome to CureGo Clinic</h1>
+    </header>
 <div class="container">
+    <!-- Welcome Section -->
+    <h1>Welcome, <span id="patient-name">[Patient Name]</span>!</h1>
 
-    <h1>Welcome, <span id="patient-name">[Patient Name]</span></h1>
-
-    <div class="patientInfo">
+    <!-- Patient Information Section -->
+    <div class="patient-info">
         <h2>Your Information</h2>
-        <p><strong>Email:</strong> <span id="patientEmail">[Email]</span></p>
-        <p><strong>Date of Birth:</strong> <span id="patientDob">January 1, 1985</span></p>
-        <p><strong>Gender:</strong> <span id="patientGender">Male</span></p>
+        <p><strong>Email:</strong> <span id="patient-email">[Email]</span></p>
+        <p><strong>Date of Birth:</strong> <span id="patient-dob">January 1, 1985</span></p>
+        <p><strong>Gender:</strong> <span id="patient-gender">Male</span></p>
     </div>
 
+    <!-- Appointments Section -->
     <h2>Your Appointments</h2>
 
     <a href="/book-appointment" class="btn-link">Book a New Appointment</a>
@@ -27,64 +34,61 @@
                 <th>Date</th>
                 <th>Time</th>
                 <th>Doctor's Name</th>
-                <th>Doctor's Photo</th> 
                 <th>Appointment Status</th>
                 <th>Cancel</th>
             </tr>
         </thead>
-        <tbody id="appointments-list">
+        <tbody>
+            <tr>
+                <td>January 25, 2025</td>
+                <td>10:30 AM</td>
+                <td>Dr. Sarah Smith</td>
+                <td>Confirmed</td>
+                <td><a href="/cancel-appointment?id=1" class="btn-link">Cancel</a></td>
+            </tr>
+            <tr>
+                <td>February 2, 2025</td>
+                <td>2:00 PM</td>
+                <td>Dr. James Lee</td>
+                <td>Pending</td>
+                <td><a href="/cancel-appointment?id=2" class="btn-link">Cancel</a></td>
+            </tr>
         </tbody>
     </table>
 
+    <!-- Sign Out Link -->
     <div class="sign-out">
-        <a href="/home" onclick="signOut()">Sign Out</a>
+        <a href="login.html" onclick="signOut()">Sign Out</a>
     </div>
 </div>
 
 <script>
+    // Get the email from localStorage
     const patientEmail = localStorage.getItem('email');
     
-    document.getElementById('patientEmail').textContent = patientEmail;
-    document.getElementById('patient-name').textContent = patientEmail.split('@')[0];
-
-
-    const appointments = [
-        { 
-            date: 'January 25, 2025', 
-            time: '10:30 AM', 
-            doctorName: 'Dr. Mona Ahmed', 
-            status: 'Confirmed', 
-            doctorPhoto: 'doctor1.jpg'  
-        },
-        { 
-            date: 'February 2, 2025', 
-            time: '2:00 PM', 
-            doctorName: 'Dr. Tariq Fahad', 
-            status: 'Pending', 
-            doctorPhoto: 'doctor2.jpg' 
-        }
-    ];
-
-    const appointmentsList = document.getElementById('appointments-list');
-    appointments.forEach(appointment => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${appointment.date}</td>
-            <td>${appointment.time}</td>
-            <td>${appointment.doctorName}</td>
-            <td><img src="${appointment.doctorPhoto}" alt="${appointment.doctorName}" width="50" height="50"></td>
-            <td>${appointment.status}</td>
-            <td><a href="/cancel-appointment?id=${appointment.date}" class="btn-link">Cancel</a></td>
-        `;
-        appointmentsList.appendChild(row);
-    });
-
-    function signOut() {
-        localStorage.removeItem('email');
-        localStorage.removeItem('role');
-        window.location.href = '/home';  
-    }
+    // Display the email on the page
+    document.getElementById('patient-email').textContent = patientEmail;
+    document.getElementById('patient-name').textContent = patientEmail.split('@')[0]; // Display the part before "@" as name
 </script>
-
+<footer>
+    <div class="footer-container">
+        <p class="copyright">Copyright &copy; 2025 CureGo. All rights reserved.</p>
+        <div class="contact-info">
+            <p>Contact Us:</p>
+            <div class="contact-item">
+                <img src="phone.png" alt="Phone Icon" class="icon">
+                <span>+966111111</span>
+            </div>
+            <div class="contact-item">
+                <img src="telephone2.png" alt="Mobile Icon" class="icon">
+                <span>+01134657</span>
+            </div>
+            <div class="contact-item">
+                <img src="Email.png" alt="Email Icon" class="icon">
+                <span>CureGo@gmail.com</span>
+            </div>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
