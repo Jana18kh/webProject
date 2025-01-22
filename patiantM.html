@@ -1,90 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <title>Patient's Medications</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #ccd5e2;
-            margin: 20px;
-        }
-        .container {
-            border: 1px solid #0000FF; 
-            padding: 20px;
-            width: 80%;
-            max-width: 800px;
-            margin: auto;
-            background-color: rgb(202, 240, 233);
-            border-radius: 5px;
-        }
-        h2 {
-            text-align: center;
-            font-weight: bold;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        input[type="text"], input[type="number"] {
-            width: 30%;
-            padding: 5px;
-            box-sizing: border-box;
-        }
-        .gender-options, .medications-options {
-            margin-left: 20px;
-        }
-        .gender-options label, .medications-options label {
-            font-weight: normal;
-        }
-        button {
-            width: 20%;
-            padding: 10px;
-            background-color: #0000FF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #5858f8;
-        }
-    </style>
+   
 </head>
 <body>
+
+    <header>
+        <img src="logo.jpg" alt="CureGo Clinic Logo" class="logo">
+        <h1>Welcome to CureGo Clinic</h1>
+    </header>
+
+ 
     <div class="container">
         <h2>Patient's Medications</h2>
-        <form action="#" method="post">
+        <form action="doctorHomepage.html" method="post">
             <div class="form-group">
                 <label for="patient-name">Patient's Name:</label>
-                <input type="text" id="patient-name" value="Noora" readonly>
+                <input type="text" id="patient-name" value="Leena Naser" readonly>
             </div>
             <div class="form-group">
                 <label for="age">Age:</label>
-                <input type="number" id="age" value="20" min="0">
+                <input type="number" id="age" value="40" min="0">
             </div>
             <div class="form-group">
                 <label>Gender:</label>
                 <div class="gender-options">
                     <label><input type="radio" name="gender" value="male"> Male</label><br>
-                    <label><input type="radio" name="gender" value="female" > Female</label>
+                    <label><input type="radio" name="gender" value="female" checked> Female</label>
                 </div>
             </div>
             <div class="form-group">
                 <label>Medications:</label>
                 <div class="medications-options">
-                    <label><input type="checkbox" name="medications" value="aspirin" > Aspirin</label><br>
+                    <label><input type="checkbox" name="medications" value="aspirin"> Aspirin</label><br>
                     <label><input type="checkbox" name="medications" value="ibuprofen"> Ibuprofen</label><br>
                     <label><input type="checkbox" name="medications" value="paracetamol"> Paracetamol</label><br>
-                    <label><input type="checkbox" name="medications" value="antibiotics"> Antibiotics</label>
+                    <label><input type="checkbox" name="medications" value="antibiotics" checked> Antibiotics</label>
                 </div>
             </div>
-            <button type="submit">Submit</button>
+            <button class="btn" type="submit">Submit</button>
         </form>
     </div>
+
+  
+    <footer>
+        <div class="footer-container">
+            <p class="copyright">Copyright &copy; 2025 CureGo. All rights reserved.</p>
+            <div class="contact-info">
+                <p>Contact Us:</p>
+                <div class="contact-item">
+                    <img src="phone.png" alt="Phone Icon" class="icon">
+                    <span>+966111111</span>
+                </div>
+                <div class="contact-item">
+                    <img src="telephone2.png" alt="Mobile Icon" class="icon">
+                    <span>+01134657</span>
+                </div>
+                <div class="contact-item">
+                    <img src="Email.png" alt="Email Icon" class="icon">
+                    <span>CureGo@gmail.com</span>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
