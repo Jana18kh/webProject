@@ -1,58 +1,143 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Login Page</title>
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor's Homepage</title>
+  </head>
+  <body>
+    <header>
+        <img src="logo.jpg" alt="CureGo Clinic Logo" class="logo">
+        <h1>Welcome to CureGo Clinic</h1>
+    </header>
+    
+    <div>
+        <h1>Welcome Dr. Sara</h1>
+        <a href="/homepage">Log out</a>
+    </div>
+   
 
-</head>
-<body>
+      <div id="info">
+        <p>First name: <b id="firstName">Sara</b></p>
+        <p>Last name: <b id="firstName">Khalid</b></p>
+        <p>ID: <b id="ID">55241</b></p>
+        <p>Email Address: <b id="email">dr.sara@gmail.com</b></p>
+      </div>
+      <div>
+        <img src="doctor.jpg" alt="Mona's photo" width="200" height="150" />
+      </div>
+    </div>
+    <h2>Upcoming Appointment</h2>
+    <table style="width: 100%; border: 1px solid black; text-align: center">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Patient's Name</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Reason for visit</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>23/2/2025</td>
+          <td>11 AM</td>
+          <td>Nora Saad</td>
+          <td>15</td>
+          <td>Female</td>
+          <td>Headache</td>
+          <td id="status"><span class="status">pending</span></td>
+        </tr>
+        <tr>
+          <td>16/7/2025</td>
+          <td>5 PM</td>
+          <td>Majed Ahmad</td>
+          <td>45</td>
+          <td>Male</td>
+          <td>Back pain</td>
+          <td><span class="status">Confimed</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <h2>Your Patients</h2>
+    <table style="width: 100%; border: 1px solid black; text-align: center">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Medications</th>
+        </tr>
+      </thead>
+      <tbody id="patients"></tbody>
+    </table>
+    <script>
+      const patients = [
+        { name: "Majed saleh", age: 35, gender: "Male", medications: "N/A" },
+        {
+          name: "Leena Naser",
+          age: 40,
+          gender: "Female",
+          medications: "Antibiotics",
+        },
+      ];
 
-<div class="loginContainer">
-    <h2>Login</h2>
-    <form id="loginForm">
-        <div class="loginInput">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" required placeholder="Enter your email">
-        </div>
-
-        <div class="loginInput">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required placeholder="Enter your password">
-        </div>
-
-        <div class="loginInput">
-            <label for="role">User Role</label>
-            <select id="role" name="role" required>
-                <option value="patient">Patient</option>
-                <option value="doctor">Doctor</option>
-            </select>
-        </div>
-
-        <button type="submit" class="btn">Login</button>
-    </form>
-</div>
-
-<script>
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
-        event.preventDefault(); 
-
-        // Get the values
-        const email = document.getElementById('email').value;
-        const role = document.getElementById('role').value;
-
-        // Store the values in localStorage
-        localStorage.setItem('email', email); 
-        localStorage.setItem('role', role);
-
-        // Redirect the user to its appropriate homepage (patient or doctor)
-        if (role === 'patient') {
-            window.location.href = 'patient-homepage.html'; 
-        } else if (role === 'doctor') {
-            window.location.href = 'doctor-homepage.html'; 
+      patients.sort(function (patient1, patient2) {
+        if (patient1.name > patient2.name) {
+          return 1;
+        } else if (patient1.name < patient2.name) {
+          return -1;
         }
-    });
-</script>
+      });
+
+      patients.forEach(function (patient) {
+        const sorted = `
+        <tr >
+          <td>${patient.name}</td>
+          <td>${patient.age}</td>
+          <td>${patient.gender}</td>
+          <td >${patient.medications}</td>
+          <td><a href="patientM.html">Prescribe</a></td>
+        </tr>
+      `;
+        document.getElementById("patients").innerHTML += sorted;
+      });
+
+      function status() {
+        const allStatus = document.getElementsByClassName("status");
+        for (let i = 0; i < allStatus.length; i++) {
+          if (allStatus[i].textContent.trim() === "pending") {
+            allStatus[i].innerHTML =
+              '<button class="btn" type="button" onclick="">Confirm</button>';
+          }
+        }
+      }
+      window.onload = status;
+    </script>
 
 
-</body>
+<footer>
+    <div class="footer-container">
+        <p class="copyright">Copyright &copy; 2025 CureGo. All rights reserved.</p>
+        <div class="contact-info">
+            <p>Contact Us:</p>
+            <div class="contact-item">
+                <img src="phone.png" alt="Phone Icon" class="icon">
+                <span>+966111111</span>
+            </div>
+            <div class="contact-item">
+                <img src="telephone2.png" alt="Mobile Icon" class="icon">
+                <span>+01134657</span>
+            </div>
+            <div class="contact-item">
+                <img src="Email.png" alt="Email Icon" class="icon">
+                <span>CureGo@gmail.com</span>
+            </div>
+        </div>
+    </div>
+</footer>
+  </body>
 </html>
