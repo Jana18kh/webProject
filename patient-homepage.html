@@ -1,108 +1,22 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Homepage</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .container {
-            width: 80%;
-            max-width: 1000px;
-            background-color: #fff;
-            padding: 20px;
-            margin-top: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        h1, h2 {
-            text-align: center;
-        }
-
-        .patient-info {
-            margin-bottom: 30px;
-        }
-
-        .patient-info p {
-            font-size: 16px;
-            margin: 5px 0;
-        }
-
-        .appointments-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        .appointments-table th, .appointments-table td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
-
-        .appointments-table th {
-            background-color: #4a90e2;
-            color: white;
-        }
-
-        .appointments-table img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-        }
-
-        .btn-link {
-            color: #4a90e2;
-            text-decoration: none;
-            font-size: 16px;
-        }
-
-        .btn-link:hover {
-            text-decoration: underline;
-        }
-
-        .sign-out {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .sign-out a {
-            font-size: 18px;
-            color: #e94f47;
-            text-decoration: none;
-        }
-
-        .sign-out a:hover {
-            text-decoration: underline;
-        }
-
-    </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- Welcome Section -->
-    <h1>Welcome, <span id="patient-name">[Patient Name]</span>!</h1>
 
-    <!-- Patient Information Section -->
-    <div class="patient-info">
+    <h1>Welcome, <span id="patient-name">[Patient Name]</span></h1>
+
+    <div class="patientInfo">
         <h2>Your Information</h2>
-        <p><strong>Email:</strong> <span id="patient-email">[Email]</span></p>
-        <p><strong>Date of Birth:</strong> <span id="patient-dob">January 1, 1985</span></p>
-        <p><strong>Gender:</strong> <span id="patient-gender">Male</span></p>
+        <p><strong>Email:</strong> <span id="patientEmail">[Email]</span></p>
+        <p><strong>Date of Birth:</strong> <span id="patientDob">January 1, 1985</span></p>
+        <p><strong>Gender:</strong> <span id="patientGender">Male</span></p>
     </div>
 
-    <!-- Appointments Section -->
     <h2>Your Appointments</h2>
 
     <a href="/book-appointment" class="btn-link">Book a New Appointment</a>
@@ -113,41 +27,64 @@
                 <th>Date</th>
                 <th>Time</th>
                 <th>Doctor's Name</th>
+                <th>Doctor's Photo</th> 
                 <th>Appointment Status</th>
                 <th>Cancel</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>January 25, 2025</td>
-                <td>10:30 AM</td>
-                <td>Dr. Sarah Smith</td>
-                <td>Confirmed</td>
-                <td><a href="/cancel-appointment?id=1" class="btn-link">Cancel</a></td>
-            </tr>
-            <tr>
-                <td>February 2, 2025</td>
-                <td>2:00 PM</td>
-                <td>Dr. James Lee</td>
-                <td>Pending</td>
-                <td><a href="/cancel-appointment?id=2" class="btn-link">Cancel</a></td>
-            </tr>
+        <tbody id="appointments-list">
+            <!-- Appointment rows will be here -->
         </tbody>
     </table>
 
-    <!-- Sign Out Link -->
     <div class="sign-out">
         <a href="/home" onclick="signOut()">Sign Out</a>
     </div>
 </div>
 
 <script>
-    // Get the email from localStorage
     const patientEmail = localStorage.getItem('email');
     
-    // Display the email on the page
-    document.getElementById('patient-email').textContent = patientEmail;
-    document.getElementById('patient-name').textContent = patientEmail.split('@')[0]; // Display the part before "@" as name
+    document.getElementById('patientEmail').textContent = patientEmail;
+    document.getElementById('patient-name').textContent = patientEmail.split('@')[0];
+
+
+    const appointments = [
+        { 
+            date: 'January 25, 2025', 
+            time: '10:30 AM', 
+            doctorName: 'Dr. Mona Ahmed', 
+            status: 'Confirmed', 
+            doctorPhoto: 'doctor1.jpg'  
+        },
+        { 
+            date: 'February 2, 2025', 
+            time: '2:00 PM', 
+            doctorName: 'Dr. Tariq Fahad', 
+            status: 'Pending', 
+            doctorPhoto: 'doctor2.jpg' 
+        }
+    ];
+
+    const appointmentsList = document.getElementById('appointments-list');
+    appointments.forEach(appointment => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${appointment.date}</td>
+            <td>${appointment.time}</td>
+            <td>${appointment.doctorName}</td>
+            <td><img src="${appointment.doctorPhoto}" alt="${appointment.doctorName}" width="50" height="50"></td>
+            <td>${appointment.status}</td>
+            <td><a href="/cancel-appointment?id=${appointment.date}" class="btn-link">Cancel</a></td>
+        `;
+        appointmentsList.appendChild(row);
+    });
+
+    function signOut() {
+        localStorage.removeItem('email');
+        localStorage.removeItem('role');
+        window.location.href = '/home';  
+    }
 </script>
 
 </body>
