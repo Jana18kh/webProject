@@ -8,20 +8,28 @@
 
     <style>
     body{
-         display: flex;
-        justify-content: center;
-        align-items: center;
+       font-family: Arial, sans-serif;
+            background-color: #e3f2fd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
     }
     .loginContainer{
          background-color: #fff;
-            padding: 20px;
+            padding: 40px 60px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            width: 350px;
+            text-align: center;
+
     }
      .loginContainer h2 {
-            text-align: center;
-            margin-bottom: 20px;
+         color: #2196f3;
+         font-size: 2.5em;
+         text-align: center;
+         margin-bottom: 20px;
         }
 
         .loginInput {
@@ -32,6 +40,8 @@
             font-size: 14px;
             margin-bottom: 5px;
             display: block;
+            color: #555;
+
         }
 
         .loginInput input, .loginInput select {
@@ -47,6 +57,21 @@
             outline: none;
         }
 
+        .btn {
+            display: inline-block;
+            padding: 15px 25px;
+            background-color: #2196f3; 
+            color: white;
+            font-size: 1.2em;
+            text-decoration: none;
+            border-radius: 5px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: #1976d2; 
+        }
 
     </style>
 
@@ -92,9 +117,9 @@
         localStorage.setItem('email', email); 
         localStorage.setItem('role', role);
 
-        // direct the user to the appropriate homepage
+        // Redirect the user to the appropriate homepage
         if (role === 'patient') {
-            window.location.href = 'patient-homepage.html'; 
+            window.location.href = 'patientHomepage.html'; 
         } else if (role === 'doctor') {
             window.location.href = 'doctor-homepage.html'; 
         }
