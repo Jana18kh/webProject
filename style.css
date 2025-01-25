@@ -2,8 +2,6 @@
 body {
   font-family: Arial, sans-serif;
   background-color: #0e294f;
-  margin: 0;
-  padding: 0;
   color: #000;
 }
 
@@ -12,19 +10,14 @@ header, footer {
   background-color: #9cbfe8;
   color: white;
   text-align: center;
-  padding: 10px 0;
+  padding: 10px;
   font-family: 'Times New Roman', Times, serif;
   display: flex;
   align-items: center; 
-  padding: 10px; 
 }
 
 header h1, footer p {
-  margin: 0;
-  padding: 0;
-  margin: 0; 
   flex: 1; 
-  text-align: left; 
 }
 
 
@@ -33,11 +26,6 @@ header h1, footer p {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-}
-
-.copyright {
-  margin: 0;
-  flex: 1;
 }
 
 .contact-info {
@@ -73,7 +61,7 @@ header h1, footer p {
   border-radius: 5px;
 }
 
-h2 {
+h1 {
   text-align: center;
   font-weight: bold;
 }
