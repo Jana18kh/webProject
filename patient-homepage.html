@@ -1,88 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Homepage</title>
+  
 </head>
 <body>
 
 <div class="container">
+    <h1>Welcome, <span id="patientName"></span>!</h1>
 
-    <h1>Welcome, <span id="patient-name">[Patient Name]</span></h1>
-
+    <!-- patient’s information -->
     <div class="patientInfo">
         <h2>Your Information</h2>
-        <p><strong>Email:</strong> <span id="patientEmail">[Email]</span></p>
-        <p><strong>Date of Birth:</strong> <span id="patientDob">January 1, 1985</span></p>
-        <p><strong>Gender:</strong> <span id="patientGender">Male</span></p>
+        <p><strong>Name:</strong> <span id="patientFullName"></span></p>
+        <p><strong>ID:</strong> <span id="patientID"></span></p>
+        <p><strong>Email:</strong> <span id="patientEmail"></span></p>
+        <p><strong>Date of Birth:</strong> <span id="patientDOB"></span></p>
+        <p><strong>Phone Number:</strong> <span id="patientPhone"></span></p>
+        <p><strong>Address:</strong> <span id="patientAddress"></span></p>
     </div>
 
+    <!--  request a new appointment -->
+    <div class="appointmentRequest">
+        <a href="appointmentBooking.html" class="btn-link">Book a New Appointment</a>
+    </div>
+
+    <!-- Patient's Appointments Table -->
     <h2>Your Appointments</h2>
-
-    <a href="/book-appointment" class="btn-link">Book a New Appointment</a>
-
     <table class="appointments-table">
         <thead>
             <tr>
                 <th>Date</th>
                 <th>Time</th>
                 <th>Doctor's Name</th>
-                <th>Doctor's Photo</th> 
-                <th>Appointment Status</th>
-                <th>Cancel</th>
+                <th>Doctor's Photo</th>
+                <th>Status</th>
+                <th>Action</th>
             </tr>
         </thead>
-        <tbody id="appointments-list">
+        <tbody id="appointmentsTable">
+
         </tbody>
     </table>
 
+    <!-- Sign-Out -->
     <div class="sign-out">
-        <a href="/home" onclick="signOut()">Sign Out</a>
+        <a href="homepage.html">Sign Out</a>
     </div>
 </div>
 
 <script>
-    const patientEmail = localStorage.getItem('email');
-    
-    document.getElementById('patientEmail').textContent = patientEmail;
-    document.getElementById('patient-name').textContent = patientEmail.split('@')[0];
+    const patient = {
+        name: localStorage.getItem('name'),
+        id: localStorage.getItem('id'),
+        email: localStorage.getItem('email'),
+        dob: localStorage.getItem('dob'),
+        phone: localStorage.getItem('phone'),
+        address: localStorage.getItem('address'),
+        appointments: JSON.parse(localStorage.getItem('appointments')) || [] 
+    };
+
+    document.getElementById('patientName').textContent = patient.name;
+    document.getElementById('patientFullName').textContent = patient.name;
+    document.getElementById('patientID').textContent = patient.id;
+    document.getElementById('patientEmail').textContent = patient.email;
+    document.getElementById('patientDOB').textContent = patient.dob;
+    document.getElementById('patientPhone').textContent = patient.phone;
+    document.getElementById('patientAddress').textContent = patient.address;
 
 
-    const appointments = [
-        { 
-            date: 'January 25, 2025', 
-            time: '10:30 AM', 
-            doctorName: 'Dr. Mona Ahmed', 
-            status: 'Confirmed', 
-            doctorPhoto: 'doctor1.jpg'  
-        },
-        { 
-            date: 'February 2, 2025', 
-            time: '2:00 PM', 
-            doctorName: 'Dr. Tariq Fahad', 
-            status: 'Pending', 
-            doctorPhoto: 'doctor2.jpg' 
-        }
-    ];
+    function displayAppointments() {
+        const appointmentsTable = document.getElementById('appointmentsTable');
+        appointmentsTable.innerHTML = ''; 
 
-    const appointmentsList = document.getElementById('appointments-list');
-    appointments.forEach(appointment => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${appointment.date}</td>
-            <td>${appointment.time}</td>
-            <td>${appointment.doctorName}</td>
-            <td><img src="${appointment.doctorPhoto}" alt="${appointment.doctorName}" width="50" height="50"></td>
-            <td>${appointment.status}</td>
-            <td><a href="/cancel-appointment?id=${appointment.date}" class="btn-link">Cancel</a></td>
-        `;
-        appointmentsList.appendChild(row);
-    });
+        patient.appointments.sort((a, b) => new Date(a.date) - new Date(b.date)); 
 
-    function signOut() {
-        localStorage.removeItem('email');
-        localStorage.removeItem('role');
-        window.location.href = '/home';  
+        patient.appointments.forEach(appointment => {
+            const row = document.createElement('tr');
+            
+            row.innerHTML = `
+                <td>${appointment.date}</td>
+                <td>${appointment.time}</td>
+                <td>${appointment.doctorName}</td>
+                <td><img src="${appointment.doctorPhoto}" alt="${appointment.doctorName}"></td>
+                <td>${appointment.status}</td>
+                <td><a href="#" class="btn-link" onclick="cancelAppointment('${appointment.id}')">Cancel</a></td>
+            `;
+            
+            appointmentsTable.appendChild(row);
+        });
+    }
+
+    displayAppointments();
+
+    function cancelAppointment(appointmentId) {
+        const updatedAppointments = patient.appointments.filter(appointment => appointment.id !== appointmentId);
+        localStorage.setItem('appointments', JSON.stringify(updatedAppointments));
+        displayAppointments(); 
     }
 </script>
 
