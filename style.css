@@ -99,18 +99,18 @@ th, td {
   text-align: center;
 }
 
-.sign-out {
+.signOut {
   text-align: center;
   margin-top: 30px;
 }
 
-.sign-out a {
+.signOut a {
   font-size: 18px;
   color: #e94f47;
   text-decoration: none;
 }
 
-.sign-out a:hover {
+.signOut a:hover {
   text-decoration: underline;
 }
 
