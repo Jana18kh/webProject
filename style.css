@@ -51,8 +51,7 @@ footer p {
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: auto;
-  max-width: 90%;
+  width: 700px;
   margin: 0 auto;
   display: flex; 
   flex-direction: column;
