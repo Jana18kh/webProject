@@ -1,51 +1,77 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Appointment Booking</title>
   </head>
   <body>
     <header>
-        <img src="logo.jpg" alt="CureGo Clinic Logo" class="logo">
-        <h1>Welcome to CureGo Clinic</h1>
+      <img src="logo.jpg" alt="CureGo Clinic Logo" class="logo" />
+      <h1>Welcome to CureGo Clinic</h1>
     </header>
-    <h1>Book an Appointment</h1>
-    <form action="" id="specialty">
-      <label for="specialtyOptions">Select Specialty:</label>
-      <select id="specialtyOptions" required>
-        <option value="" disabled>Select Specialty</option>
-        <option value="cardiology">Cardiology</option>
-        <option value="neurology">Neurology</option>
-        <option value="pediatrics">Pediatrics</option>
-        <option value="orthopedics">Orthopedics</option>
-        <option value="dermatology">Dermatology</option>
-        <option value="psychiatry">Psychiatry</option>
-        <option value="oncology">Oncology</option>
-        <option value="gynecology">Gynecology</option>
-      </select>
-      <button class="btn" type="submit">Submit</button><br />
-    </form><br>
-    <form action="" id="appointmentBooking">
-      <label for="doctor">Select Doctor: </label>
-      <select id="doctor" required>
-        <option value="" disabled>Choose Doctor</option>
-      </select>
-      <br /><br>
-      <label for="date">Select Date: </label>
-      <input type="date" name="date" /><br /><br>
-      <label for="time">Select Time: </label>
-      <input type="time" name="time" /><br /><br>
-      <label for="reason"
-        >Reason for Visit: <br><textarea name="reason" rows="4"></textarea></label
-      ><br /><br>
-      <a href="/patient-homepage.html">
-        <button class="btn" type="submit">Submit Booking</button>
-      </a>
-      
-    </form>
-
+    <div class="container">
+      <h2>Book an Appointment</h2>
+      <form action="" id="specialty">
+        <label for="specialtyOptions">Select Specialty:</label>
+        <select id="specialtyOptions" required>
+          <option value="" disabled>Select Specialty</option>
+          <option value="cardiology">Cardiology</option>
+          <option value="neurology">Neurology</option>
+          <option value="pediatrics">Pediatrics</option>
+          <option value="orthopedics">Orthopedics</option>
+          <option value="dermatology">Dermatology</option>
+          <option value="psychiatry">Psychiatry</option>
+          <option value="oncology">Oncology</option>
+          <option value="gynecology">Gynecology</option>
+        </select>
+        <button class="btn" type="submit">Submit</button><br />
+      </form>
+      <br />
+      <form action="" id="appointmentBooking">
+        <label for="doctor">Select Doctor: </label>
+        <select id="doctor" required>
+          <option value="" disabled>Choose Doctor</option>
+        </select>
+        <br /><br />
+        <label for="date">Select Date: </label>
+        <input type="date" name="date" /><br /><br />
+        <label for="time">Select Time: </label>
+        <input type="time" name="time" /><br /><br />
+        <label for="reason"
+          >Reason for Visit: <br /><textarea
+            name="reason"
+            rows="4"
+          ></textarea></label
+        ><br /><br />
+        <a href="/patient-homepage.html">
+          <button type="submit">Submit Booking</button>
+        </a>
+      </form>
+    </div>
+    <footer>
+      <div class="footer-container">
+        <p class="copyright">
+          Copyright &copy; 2025 CureGo. All rights reserved.
+        </p>
+        <div class="contact-info">
+          <p>Contact Us:</p>
+          <div class="contact-item">
+            <img src="phone.png" alt="Phone Icon" class="icon" />
+            <span>+966111111</span>
+          </div>
+          <div class="contact-item">
+            <img src="telephone2.png" alt="Mobile Icon" class="icon" />
+            <span>+01134657</span>
+          </div>
+          <div class="contact-item">
+            <img src="Email.png" alt="Email Icon" class="icon" />
+            <span>CureGo@gmail.com</span>
+          </div>
+        </div>
+      </div>
+    </footer>
     <script>
       const specialtyDoctors = {
         cardiology: ["Dr. Mona", "Dr. Omar", "Dr. Salma"],
@@ -74,25 +100,5 @@
         document.getElementById("doctor").innerHTML = doctorOptions;
       }
     </script>
-    <footer>
-        <div class="footer-container">
-            <p class="copyright">Copyright &copy; 2025 CureGo. All rights reserved.</p>
-            <div class="contact-info">
-                <p>Contact Us:</p>
-                <div class="contact-item">
-                    <img src="phone.png" alt="Phone Icon" class="icon">
-                    <span>+966111111</span>
-                </div>
-                <div class="contact-item">
-                    <img src="telephone2.png" alt="Mobile Icon" class="icon">
-                    <span>+01134657</span>
-                </div>
-                <div class="contact-item">
-                    <img src="Email.png" alt="Email Icon" class="icon">
-                    <span>CureGo@gmail.com</span>
-                </div>
-            </div>
-        </div>
-    </footer>
   </body>
 </html>

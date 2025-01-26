@@ -1,93 +1,29 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HomePage</title>
- <style>
-body {
-    font-family: Arial, sans-serif;
-    background-color: #e3f2fd;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    padding: 40px 60px;
-    background-color: #ffffff; 
-    border-radius: 8px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-    width: 400px; 
-    max-width: 100%; 
-}
-
-h1 {
-    font-size: 3.5em; 
-    color: #2196f3; 
-    margin-bottom: 30px; 
-    font-weight: 700;
-}
-
-.button {
-    display: inline-block;
-    padding: 18px 30px; 
-    background-color: #2196f3; 
-    color: white;
-    text-decoration: none;
-    font-size: 1.4em; 
-    border-radius: 5px;
-    margin: 15px 0;
-    transition: background-color 0.3s ease;
-}
-
-.button:hover {
-    background-color: #1976d2; 
-}
-
-p {
-    font-size: 1.4em; 
-    color: #555;
-}
-
-p a {
-    color: #2196f3; 
-    font-weight: bold;
-    text-decoration: none;
-}
-
-p a:hover {
-    text-decoration: underline;
-}
-
-
-
-</style>
-</head>
-
-
-<body>
-   
-
+  </head>
+  <body>
+    <header>
+      <img src="logo.jpg" alt="CureGo Clinic Logo" class="logo" />
+      <h1>Welcome to CureGo Clinic</h1>
+    </header>
     <div class="container">
-        <div class="options-side">
-            <h1>CureGO</h1>
-            <a href="Login.html" class="button" id="loginLink">Log in</a>
-            <p>New user? <a href="signUp.html">Sign-up</a></p>
-        </div>
-      
+      <div>
+        <h2>CureGO</h2>
+        <a href="Login.html">
+          <button type="submit">Log in</button>
+        </a>
+        <p>
+          New user?
+          <a href="signUp.html">
+            <button type="submit">Sign up</button>
+          </a>
+        </p>
+      </div>
     </div>
-
-</body>
-
-
+  </body>
 </html>

@@ -1,131 +1,91 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <link rel="stylesheet" href="style.css">
-    <meta charset="UTF-8">
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
     <title>Login Page</title>
-
-
-    <style>
-    body{
-       font-family: Arial, sans-serif;
-            background-color: #e3f2fd;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-    }
-    .loginContainer{
-         background-color: #fff;
-            padding: 40px 60px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 350px;
-            text-align: center;
-
-    }
-     .loginContainer h2 {
-         color: #2196f3;
-         font-size: 2.5em;
-         text-align: center;
-         margin-bottom: 20px;
-        }
-
-        .loginInput {
-            margin-bottom: 15px;
-        }
-
-        .loginInput label {
-            font-size: 14px;
-            margin-bottom: 5px;
-            display: block;
-            color: #555;
-
-        }
-
-        .loginInput input, .loginInput select {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-        }
-
-        .loginInput input:focus, .loginInput select:focus {
-            border-color: #4a90e2;
-            outline: none;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 15px 25px;
-            background-color: #2196f3; 
-            color: white;
-            font-size: 1.2em;
-            text-decoration: none;
-            border-radius: 5px;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .btn:hover {
-            background-color: #1976d2; 
-        }
-
-    </style>
-
-
-
-</head>
-<body>
-
-<div class="loginContainer">
-    <h2>Login</h2>
-    <form id="loginForm">
-        <div class="loginInput">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" required placeholder="Enter your email">
+  </head>
+  <body>
+    <header>
+      <img src="logo.jpg" alt="CureGo Clinic Logo" class="logo" />
+      <h1>Welcome to CureGo Clinic</h1>
+    </header>
+    <div class="container">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <div>
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="Enter your email"
+          />
         </div>
-
-        <div class="loginInput">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required placeholder="Enter your password">
+        <div>
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            placeholder="Enter your password"
+          />
         </div>
-
-        <div class="loginInput">
-            <label for="role">User Role</label>
-            <select id="role" name="role" required>
-                <option value="patient">Patient</option>
-                <option value="doctor">Doctor</option>
-            </select>
+        <div>
+          <label for="role">User Role</label>
+          <select id="role" name="role" required>
+            <option value="patient">Patient</option>
+            <option value="doctor">Doctor</option>
+          </select>
         </div>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+    <footer>
+        <div class="footer-container">
+          <p class="copyright">
+            Copyright &copy; 2025 CureGo. All rights reserved.
+          </p>
+          <div class="contact-info">
+            <p>Contact Us:</p>
+            <div class="contact-item">
+              <img src="phone.png" alt="Phone Icon" class="icon" />
+              <span>+966111111</span>
+            </div>
+            <div class="contact-item">
+              <img src="telephone2.png" alt="Mobile Icon" class="icon" />
+              <span>+01134657</span>
+            </div>
+            <div class="contact-item">
+              <img src="Email.png" alt="Email Icon" class="icon" />
+              <span>CureGo@gmail.com</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+    <script>
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
 
-        <button type="submit" class="btn">Login</button>
-    </form>
-</div>
+          // Get the values
+          const email = document.getElementById("email").value;
+          const role = document.getElementById("role").value;
 
-<script>
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
-        event.preventDefault(); 
+          // Store the values in localStorage
+          localStorage.setItem("email", email);
+          localStorage.setItem("role", role);
 
-        // Get the values
-        const email = document.getElementById('email').value;
-        const role = document.getElementById('role').value;
-
-        // Store the values in localStorage
-        localStorage.setItem('email', email); 
-        localStorage.setItem('role', role);
-
-        // Redirect the user to the appropriate homepage
-        if (role === 'patient') {
-            window.location.href = 'patientHomepage.html'; 
-        } else if (role === 'doctor') {
-            window.location.href = 'doctor-homepage.html'; 
-        }
-    });
-</script>
-
-
-</body>
+          // Redirect the user to the appropriate homepage
+          if (role === "patient") {
+            window.location.href = "patientHomepage.html";
+          } else if (role === "doctor") {
+            window.location.href = "doctor-homepage.html";
+          }
+        });
+    </script>
+  </body>
 </html>

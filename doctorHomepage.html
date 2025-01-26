@@ -1,82 +1,103 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Doctor's Homepage</title>
   </head>
   <body>
     <header>
-        <img src="logo.jpg" alt="CureGo Clinic Logo" class="logo">
-        <h1>Welcome to CureGo Clinic</h1>
+      <img src="logo.jpg" alt="CureGo Clinic Logo" class="logo" />
+      <h1>Welcome to CureGo Clinic</h1>
     </header>
-    
-    <div>
-        <h1>Welcome Dr. Sara</h1>
+    <div class="container">
+      <div>
+        <h2>Welcome Dr. Sara</h2>
         <a href="/homepage">Log out</a>
-    </div>
-   
-
+      </div>
       <div id="info">
         <p>First name: <b id="firstName">Sara</b></p>
-        <p>Last name: <b id="firstName">Khalid</b></p>
+        <p>Last name: <b id="lastName">Khalid</b></p>
         <p>ID: <b id="ID">55241</b></p>
         <p>Email Address: <b id="email">dr.sara@gmail.com</b></p>
       </div>
       <div>
-        <img src="doctor.jpg" alt="Mona's photo" width="200" height="150" />
+        <img src="doctor.jpg" alt="Dr. Sara's photo" width="200" height="150" />
       </div>
+      <h3>Upcoming Appointment</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Patient's Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Reason for Visit</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>23/2/2025</td>
+            <td>11 AM</td>
+            <td>Nora Saad</td>
+            <td>15</td>
+            <td>Female</td>
+            <td>Headache</td>
+            <td id="status"><span class="status">pending</span></td>
+          </tr>
+          <tr>
+            <td>16/7/2025</td>
+            <td>5 PM</td>
+            <td>Majed Ahmad</td>
+            <td>45</td>
+            <td>Male</td>
+            <td>Back pain</td>
+            <td><span class="status">Confirmed</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Your Patients</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Medications</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="patients"></tbody>
+      </table>
     </div>
-    <h2>Upcoming Appointment</h2>
-    <table style="width: 100%; border: 1px solid black; text-align: center">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Patient's Name</th>
-          <th>Age</th>
-          <th>Gender</th>
-          <th>Reason for visit</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>23/2/2025</td>
-          <td>11 AM</td>
-          <td>Nora Saad</td>
-          <td>15</td>
-          <td>Female</td>
-          <td>Headache</td>
-          <td id="status"><span class="status">pending</span></td>
-        </tr>
-        <tr>
-          <td>16/7/2025</td>
-          <td>5 PM</td>
-          <td>Majed Ahmad</td>
-          <td>45</td>
-          <td>Male</td>
-          <td>Back pain</td>
-          <td><span class="status">Confimed</span></td>
-        </tr>
-      </tbody>
-    </table>
-    <h2>Your Patients</h2>
-    <table style="width: 100%; border: 1px solid black; text-align: center">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Gender</th>
-          <th>Medications</th>
-        </tr>
-      </thead>
-      <tbody id="patients"></tbody>
-    </table>
+    <footer>
+      <div class="footer-container">
+        <p class="copyright">
+          Copyright &copy; 2025 CureGo. All rights reserved.
+        </p>
+        <div class="contact-info">
+          <p>Contact Us:</p>
+          <div class="contact-item">
+            <img src="phone.png" alt="Phone Icon" class="icon" />
+            <span>+966111111</span>
+          </div>
+          <div class="contact-item">
+            <img src="telephone2.png" alt="Mobile Icon" class="icon" />
+            <span>+01134657</span>
+          </div>
+          <div class="contact-item">
+            <img src="Email.png" alt="Email Icon" class="icon" />
+            <span>CureGo@gmail.com</span>
+          </div>
+        </div>
+      </div>
+    </footer>
     <script>
       const patients = [
-        { name: "Majed saleh", age: 35, gender: "Male", medications: "N/A" },
+        { name: "Majed Saleh", age: 35, gender: "Male", medications: "N/A" },
         {
           name: "Leena Naser",
           age: 40,
@@ -91,15 +112,16 @@
         } else if (patient1.name < patient2.name) {
           return -1;
         }
+        return 0;
       });
 
       patients.forEach(function (patient) {
         const sorted = `
-        <tr >
+        <tr>
           <td>${patient.name}</td>
           <td>${patient.age}</td>
           <td>${patient.gender}</td>
-          <td >${patient.medications}</td>
+          <td>${patient.medications}</td>
           <td><a href="patientM.html">Prescribe</a></td>
         </tr>
       `;
@@ -111,33 +133,16 @@
         for (let i = 0; i < allStatus.length; i++) {
           if (allStatus[i].textContent.trim() === "pending") {
             allStatus[i].innerHTML =
-              '<button class="btn" type="button" onclick="">Confirm</button>';
+              '<button type="button" onclick="confirmStatus(this)">Confirm</button>';
           }
         }
       }
+
+      function confirmStatus(button) {
+        button.parentElement.textContent = "Confirmed";
+      }
+
       window.onload = status;
     </script>
-
-
-<footer>
-    <div class="footer-container">
-        <p class="copyright">Copyright &copy; 2025 CureGo. All rights reserved.</p>
-        <div class="contact-info">
-            <p>Contact Us:</p>
-            <div class="contact-item">
-                <img src="phone.png" alt="Phone Icon" class="icon">
-                <span>+966111111</span>
-            </div>
-            <div class="contact-item">
-                <img src="telephone2.png" alt="Mobile Icon" class="icon">
-                <span>+01134657</span>
-            </div>
-            <div class="contact-item">
-                <img src="Email.png" alt="Email Icon" class="icon">
-                <span>CureGo@gmail.com</span>
-            </div>
-        </div>
-    </div>
-</footer>
   </body>
 </html>
