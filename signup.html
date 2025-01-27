@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <title>SignUp Page</title>
+    <style>
+        
+          #Patient-form,
+        #Doctor-form {
+            display: none;
+        }
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0;
+            background-color: #e3f2fd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; 
+        }
+
+        .signup-container {
+            width: 700px;
+            background-color: #fff;
+            color: #ffffff;
+            box-sizing: border-box;
+            text-align: left;
+            width: 400px;
+            padding: 40px 60px;
+            background-color: #ffffff; /* White background */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          
+        }
+
+        h2 {
+            text-align: center;
+            
+            font-weight: bold;
+           
+            font-size: 2.5em;
+            color: #2196f3;
+            margin-bottom: 20px;
+        }
+
+        .user-type-selection {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+
+            
+        }
+
+        .user-type-radio {
+            margin: 0 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2196f3;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            color: #555;
+            margin-bottom: 5px;
+            font-weight: bold;
+        
+
+        }
+
+        input,
+        select {
+            width: 100%;
+            background-color: #ffffff;
+            color: #333333; 
+            box-sizing: border-box;
+            font-size: 16px; /* Input text size */
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+       
+
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+           
+            background-color: #f9f9f9; 
+
+         
+            border-color: #2196f3; /* Blue border on focus */
+        }
+
+        input[type="file"] {
+            padding: 5px;
+        }
+
+        button.submit-btn {
+            font-family: 'Times New Roman', Times, serif;
+            width: 100%;
+           
+            transition: all 0.3s ease;
+            display: inline-block;
+            padding: 18px 30px;
+            background-color: #2196f3; 
+            color: white;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+         
+        }
+   
+        .submit-btn:hover:hover {
+            background-color: #1976d2; 
+        }
+
+
+
+
+       
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <img src="logo.png" alt="CureGo Clinic Logo" class="logo" />
+        <h1>Welcome to CureGo Clinic</h1>
+      </header>
+
+
+    <div class="signup-container">
+        <h2>SignUp</h2>
+        <div class="user-type-selection">
+            <label class="user-type-radio">
+                <input type="radio" name="userType" value="Patient"> Patient
+            </label>
+            <label class="user-type-radio">
+                <input type="radio" name="userType" value="Doctor"> Doctor
+            </label>
+        </div>
+
+        <form id="Patient-form">
+            <label for="firstNamePatient">First Name</label>
+            <input type="text" id="firstNamePatient" name="firstNamePatient" placeholder="Enter your first name" required>
+
+            <label for="lastNamePatient">Last Name</label>
+            <input type="text" id="lastNamePatient" name="lastNamePatient" placeholder="Enter your last name" required>
+
+            <label for="ID1">ID</label>
+            <input type="text" id="ID1" name="ID1" placeholder="Enter your ID" required>
+
+            <label for="patientGender">Gender</label>
+            <select id="patientGender" name="patientGender" required>
+                <option value="" disabled selected>Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+
+            <label for="DoB">Date of Birth</label>
+            <input type="date" id="DoB" name="DoB" required>
+
+            <label for="patientEmail">Email</label>
+            <input type="email" id="patientEmail" name="patientEmail" placeholder="Enter your email" required>
+
+            <label for="patientPassword">Password</label>
+            <input type="password" id="patientPassword" name="patientPassword" placeholder="Enter your password" required>
+
+            <button type="button" class="submit-btn" onclick="submitForm('Patient')">SignUp</button>
+        </form>
+
+        <form id="Doctor-form">
+            <label for="firstNameDoctor">First Name</label>
+            <input type="text" id="firstNameDoctor" name="firstNameDoctor" placeholder="Enter your first name" required>
+
+            <label for="lastNameDoctor">Last Name</label>
+            <input type="text" id="lastNameDoctor" name="lastNameDoctor" placeholder="Enter your last name" required>
+
+            <label for="ID2">ID</label>
+            <input type="text" id="ID2" name="ID2" placeholder="Enter your ID" required>
+
+            <label for="photoDoctor">Photo</label>
+            <input type="file" id="photoDoctor" name="photoDoctor" accept="image/*" required>
+
+            <label for="speciality">Speciality</label>
+            <select id="speciality" name="speciality" required>
+                <option value="" disabled selected>Select Speciality</option>
+                <option value="Cardiology">Cardiology</option>
+                <option value="Pediatrics">Pediatrics</option>
+                <option value="Orthopedics">Orthopedics</option>
+                <option value="Dermatology">Dermatology</option>
+                <option value="Gynecology">Gynecology</option>
+                
+            </select>
+
+            <label for="emailDoctor">Email</label>
+            <input type="email" id="emailDoctor" name="emailDoctor" placeholder="Enter your email" required>
+
+            <label for="passwordDoctor">Password:</label>
+            <input type="password" id="passwordDoctor" name="passwordDoctor" placeholder="Enter your password" required>
+
+            <button type="button" class="submit-btn" onclick="submitForm('Doctor')">SignUp</button>
+        </form>
+    </div>
+
+
+    <footer>
+        <div class="footer-container">
+          <p class="copyright">
+            Copyright &copy; 2025 CureGo. All rights reserved.
+          </p>
+          <div class="contact-info">
+            <p>Contact Us:</p>
+            <div class="contact-item">
+              <img src="phone.png" alt="Phone Icon" class="icon" />
+              <span>+966111111</span>
+            </div>
+            <div class="contact-item">
+              <img src="telephone2.png" alt="Mobile Icon" class="icon" />
+              <span>+01134657</span>
+            </div>
+            <div class="contact-item">
+              <img src="Email.png" alt="Email Icon" class="icon" />
+              <span>CureGo@gmail.com</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+
+    <script>
+        function submitForm(userType) {
+            var form;
+            if (userType === 'Patient') {
+                form = document.getElementById('Patient-form');
+            } else if (userType === 'Doctor') {
+                form = document.getElementById('Doctor-form');
+            }
+    
+            var inputs = form.querySelectorAll('input, select');
+            var isFormValid = true;
+            inputs.forEach(function(input) {
+                if (!input.value) {
+                    isFormValid = false;
+                }
+            });
+    
+            if (isFormValid) {
+                
+                if (userType === 'Patient') {
+                    window.location.href = 'patientHomepage.html';
+                } else if (userType === 'Doctor') {
+                    window.location.href = 'doctorHomepage.html';
+                }
+            } else {
+                alert('Please fill out all the fields.');
+            }
+        }
+    
+        document.querySelectorAll('input[name="userType"]').forEach(function (radio) {
+            radio.addEventListener('change', function () {
+                if (this.value === 'Patient') {
+                    document.getElementById('Patient-form').style.display = 'block';
+                    document.getElementById('Doctor-form').style.display = 'none';
+                } else if (this.value === 'Doctor') {
+                    document.getElementById('Doctor-form').style.display = 'block';
+                    document.getElementById('Patient-form').style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
