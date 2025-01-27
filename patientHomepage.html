@@ -1,133 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="stylesheet" href="style.css" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Patient Homepage</title>
-  </head>
-  <body>
-    <header>
-      <img src="logo.png" alt="CureGo Clinic Logo" class="logo" />
-      <h1>Welcome to CureGo Clinic</h1>
-    </header>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Page</title>
+ <style>
+ table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .doctorPhoto img {
+            width: 100px;
+            height: auto;
+            border-radius: 5px;
+        }
+ </style>
+</head>
+<body>
     <div class="container">
-      <h2>Welcome, <span id="patientName"></span>!</h2>
+        <div>
+            <h2>Welcome Fahad</h2>
+            <p>First name:Fahad </p>
+            <p>Last name: Ahmed</p>
+            <p>ID:87884</p>
+            <p>Email:Fahad66@hotmail.com</p>
+            <p>Date of Birth:14/8/1992</p>
 
-      <!-- patient’s information -->
-      <div>
-        <h2>Your Information</h2>
-        <p><strong>Name:</strong> <span id="patientFullName"></span></p>
-        <p><strong>ID:</strong> <span id="patientID"></span></p>
-        <p><strong>Email:</strong> <span id="patientEmail"></span></p>
-        <p><strong>Date of Birth:</strong> <span id="patientDOB"></span></p>
-        <p><strong>Phone Number:</strong> <span id="patientPhone"></span></p>
-        <p><strong>Address:</strong> <span id="patientAddress"></span></p>
-      </div>
 
-      <!--  request a new appointment -->
-      <div>
-        <a href="appointmentBooking.html" class="btn-link"
-          >Book a New Appointment</a
-        >
-      </div>
-
-      <!-- Patient's Appointments Table -->
-      <h3>Your Appointments</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Doctor's Name</th>
-            <th>Doctor's Photo</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="appointmentsTable"></tbody>
-      </table>
-      <div class="signOut">
-        <a href="homepage.html">Sign Out</a>
-      </div>
-    </div>
-    <footer>
-      <div class="footer-container">
-        <p class="copyright">
-          Copyright &copy; 2025 CureGo. All rights reserved.
-        </p>
-        <div class="contact-info">
-          <p>Contact Us:</p>
-          <div class="contact-item">
-            <img src="phone.png" alt="Phone Icon" class="icon" />
-            <span>+966111111</span>
-          </div>
-          <div class="contact-item">
-            <img src="telephone2.png" alt="Mobile Icon" class="icon" />
-            <span>+01134657</span>
-          </div>
-          <div class="contact-item">
-            <img src="Email.png" alt="Email Icon" class="icon" />
-            <span>CureGo@gmail.com</span>
-          </div>
         </div>
-      </div>
-    </footer>
-    <script>
-      const patient = {
-        name: localStorage.getItem("name"),
-        id: localStorage.getItem("id"),
-        email: localStorage.getItem("email"),
-        dob: localStorage.getItem("dob"),
-        phone: localStorage.getItem("phone"),
-        address: localStorage.getItem("address"),
-        appointments: JSON.parse(localStorage.getItem("appointments")) || [],
-      };
+<a href="appointmentBooking.html">Book an appointment</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Date</th>
+                    <th>Doctor's Name</th>
+                    <th>Doctor's Photo</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>3 PM</td>
+                    <td>20/5/2025</td>
+                    <td>Dr. Sara Ahmad</td>
+                    <td class="doctorPhoto"><img src="doctor1.jpg" alt="Dr. Sara Ahmad"></td>
+                    <td>Pending</td>
+                    <td><a href="javascript:void(0);" onclick="cancelAppointment(this)">Cancel</a></td>
+                </tr>
+                <tr>
+                    <td>10 AM</td>
+                    <td>14/2/2025</td>
+                    <td>Dr. Saleh Abdullah</td>
+                    <td class="doctorPhoto"><img src="doctor2.jpg" alt="Dr. Saleh Abdullah"></td>
+                    <td>Confirmed</td>
+                    <td><a href="javascript:void(0);" onclick="cancelAppointment(this)">Cancel</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="Homepage.html">sign out</a>
+    </div>
 
-      document.getElementById("patientName").textContent = patient.name;
-      document.getElementById("patientFullName").textContent = patient.name;
-      document.getElementById("patientID").textContent = patient.id;
-      document.getElementById("patientEmail").textContent = patient.email;
-      document.getElementById("patientDOB").textContent = patient.dob;
-      document.getElementById("patientPhone").textContent = patient.phone;
-      document.getElementById("patientAddress").textContent = patient.address;
 
-      function displayAppointments() {
-        const appointmentsTable = document.getElementById("appointmentsTable");
-        appointmentsTable.innerHTML = "";
-
-        patient.appointments.sort(
-          (a, b) => new Date(a.date) - new Date(b.date)
-        );
-
-        patient.appointments.forEach((appointment) => {
-          const row = document.createElement("tr");
-
-          row.innerHTML = `
-                <td>${appointment.date}</td>
-                <td>${appointment.time}</td>
-                <td>${appointment.doctorName}</td>
-                <td><img src="${appointment.doctorPhoto}" alt="${appointment.doctorName}"></td>
-                <td>${appointment.status}</td>
-                <td><a href="#" class="btn-link" onclick="cancelAppointment('${appointment.id}')">Cancel</a></td>
-            `;
-
-          appointmentsTable.appendChild(row);
-        });
-      }
-
-      displayAppointments();
-
-      function cancelAppointment(appointmentId) {
-        const updatedAppointments = patient.appointments.filter(
-          (appointment) => appointment.id !== appointmentId
-        );
-        localStorage.setItem(
-          "appointments",
-          JSON.stringify(updatedAppointments)
-        );
-        displayAppointments();
-      }
+     <script>
+        function cancelAppointment(link) {
+            var row = link.closest('tr'); 
+            row.remove(); 
+        }
     </script>
-  </body>
+
+</body>
 </html>
