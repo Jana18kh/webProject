@@ -1,91 +1,238 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <link rel="stylesheet" href="style.css" />
-    <meta charset="UTF-8" />
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-  </head>
-  <body>
-    <header>
-      <img src="logo.png" alt="CureGo Clinic Logo" class="logo" />
-      <h1>Welcome to CureGo Clinic</h1>
-    </header>
-    <div class="containerLog">
-      <h2>Login</h2>
-      <form id="loginForm">
-        <div>
-          <label for="email">Email Address</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            placeholder="Enter your email"
-          />
-        </div>
-        <div>
-          <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            required
-            placeholder="Enter your password"
-          />
-        </div>
-        <div>
-          <label for="role">User Role</label>
-          <select id="role" name="role" required>
-            <option value="patient">Patient</option>
-            <option value="doctor">Doctor</option>
-          </select>
-        </div>
-        <button type="submit">Login</button>
-      </form>
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e3f2fd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            position: relative; 
+            text-align: center;
+            padding:10px 40px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            max-width: 100%;
+            margin: 10px;
+            margin-top: 50px;
+        }
+
+        .logo {
+            position: absolute; 
+            top: 40px; 
+            left: 20px; 
+        }
+
+        .logo img {
+            width: 80px; 
+            height: auto;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            color: #2196f3;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+
+
+.loginInput {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.loginInput label {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+    text-align:left;
+}
+
+.loginInput input, .loginInput select {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.loginInput input:focus, .loginInput select:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+
+        .btn {
+            display: inline-block;
+            padding: 18px 30px;
+            background-color: #2196f3;
+            color: white;
+            text-decoration: none;
+            font-size: 1.4em;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .btn:hover {
+            background-color: #1976d2;
+        }
+
+        p {
+            font-size: 1.4em;
+            color: #555;
+        }
+
+        p a {
+            color: #2196f3;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        p a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background-color: #1976d2;
+            color: white;
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+       
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+ footer p {
+    margin: 0;
+    font-size: 0.9em; 
+}
+        .copyright {
+            margin: 0;
+            font-size: 1em;
+        }
+
+        .contact-info {
+            margin-top: 5px;
+        }
+
+        .contact-info p {
+            margin: 0 0 5px;
+            font-size: 0.9em;
+        }
+
+        .contact-items {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-item img.icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .contact-item span {
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+    <div class="logo">
+        <img src="logo.png" alt="CureGO Logo">
     </div>
+
+        <h1>Login</h1>
+        <form id="loginForm">
+            <div class="loginInput">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email">
+            </div>
+
+            <div class="loginInput">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required placeholder="Enter your password">
+            </div>
+
+            <div class="loginInput">
+                <label for="role">User Role</label>
+                <select id="role" name="role" required>
+                    <option value="patient">Patient</option>
+                    <option value="doctor">Doctor</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn">Login</button>
+        </form>
+
+    </div>
+
     <footer>
         <div class="footer-container">
-          <p class="copyright">
-            Copyright &copy; 2025 CureGo. All rights reserved.
-          </p>
-          <div class="contact-info">
-            <p>Contact Us:</p>
-            <div class="contact-item">
-              <img src="phone.png" alt="Phone Icon" class="icon" />
-              <span>+966111111</span>
+            <p>Copyright &copy; 2025 CureGo. All rights reserved.</p>
+            <div class="contact-info">
+                <div class="contact-items">
+                    <div class="contact-item">
+                        <img src="phone.png" alt="Phone Icon" class="icon">
+                        <span>+966111111</span>
+                    </div>
+                    <div class="contact-item">
+                        <img src="telephone2.png" alt="Mobile Icon" class="icon">
+                        <span>+01134657</span>
+                    </div>
+                    <div class="contact-item">
+                        <img src="Email.png" alt="Email Icon" class="icon">
+                        <span>CureGo@gmail.com</span>
+                    </div>
+                </div>
             </div>
-            <div class="contact-item">
-              <img src="telephone2.png" alt="Mobile Icon" class="icon" />
-              <span>+01134657</span>
-            </div>
-            <div class="contact-item">
-              <img src="Email.png" alt="Email Icon" class="icon" />
-              <span>CureGo@gmail.com</span>
-            </div>
-          </div>
         </div>
-      </footer>
+    </footer>
+
     <script>
-      document
-        .getElementById("loginForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); 
 
-          // Get the values
-          const email = document.getElementById("email").value;
-          const role = document.getElementById("role").value;
+            // Get the values
+            const email = document.getElementById('email').value;
+            const role = document.getElementById('role').value;
 
-          // Store the values in localStorage
-          localStorage.setItem("email", email);
-          localStorage.setItem("role", role);
-
-          // Redirect the user to the appropriate homepage
-          if (role === "patient") {
-            window.location.href = "patientHomepage.html";
-          } else if (role === "doctor") {
-            window.location.href = "doctor-homepage.html";
-          }
+            // Redirect the user to the appropriate homepage
+            if (role === 'patient') {
+                window.location.href = 'patientHomepage.html'; 
+            } else if (role === 'doctor') {
+                window.location.href = 'doctor-homepage.html'; 
+            }
         });
     </script>
-  </body>
+
+</body>
 </html>
