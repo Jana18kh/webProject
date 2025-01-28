@@ -1,46 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>patient's Homepage</title>
- <style>
- table {
+    <title>Patient's Homepage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #e3f2fd;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body {
+            padding-bottom: 60px;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 800px;
+            margin: 30px auto;
+        }
+
+        .logo {
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 80px;
+            height: auto;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            color: #2196f3;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        a {
+            color: #2196f3;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
-        table, th, td {
+
+        table,
+        th,
+        td {
             border: 1px solid #ccc;
         }
-        th, td {
+
+        th,
+        td {
             padding: 10px;
             text-align: left;
         }
+
         th {
             background-color: #f4f4f4;
         }
+
         .doctorPhoto img {
             width: 100px;
             height: auto;
             border-radius: 5px;
         }
- </style>
+
+       footer {
+            background-color: #1976d2;
+            color: white;
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+       
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+ footer p {
+    margin: 0;
+    font-size: 0.9em; 
+}
+        .copyright {
+            margin: 0;
+            font-size: 1em;
+        }
+
+        .contact-info {
+            margin-top: 5px;
+        }
+
+        .contact-info p {
+            margin: 0 0 5px;
+            font-size: 0.9em;
+        }
+
+        .contact-items {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-item img.icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .contact-item span {
+            font-size: 0.9em;
+        }
+    </style>
 </head>
+
 <body>
     <div class="container">
-        <div>
-            <h2>Welcome Fahad</h2>
-            <p>First name:Fahad </p>
-            <p>Last name: Ahmed</p>
-            <p>ID:87884</p>
-            <p>Email:Fahad66@hotmail.com</p>
-            <p>Date of Birth:14/8/1992</p>
-
-
+        <div class="logo">
+            <img src="logo.png" alt="CureGO Logo">
         </div>
-<a href="appointmentBooking.html">Book an appointment</a>
+        <h2>Welcome Fahad</h2>
+        <p>First name: Fahad</p>
+        <p>Last name: Ahmed</p>
+        <p>ID: 87884</p>
+        <p>Email: Fahad66@hotmail.com</p>
+        <p>Date of Birth: 14/8/1992</p>
+
+        <a href="appointmentBooking.html">Book an appointment</a>
+
         <table>
             <thead>
                 <tr>
@@ -71,16 +194,38 @@
                 </tr>
             </tbody>
         </table>
-        <a href="Homepage.html">sign out</a>
+
+        <a href="Homepage.html">Sign out</a>
     </div>
 
+    <footer>
+        <div class="footer-container">
+            <p>Copyright &copy; 2025 CureGo. All rights reserved.</p>
+            <div class="contact-info">
+                <div class="contact-items">
+                    <div class="contact-item">
+                        <img src="phone.png" alt="Phone Icon" class="icon">
+                        <span>+966111111</span>
+                    </div>
+                    <div class="contact-item">
+                        <img src="telephone2.png" alt="Mobile Icon" class="icon">
+                        <span>+01134657</span>
+                    </div>
+                    <div class="contact-item">
+                        <img src="Email.png" alt="Email Icon" class="icon">
+                        <span>CureGo@gmail.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-     <script>
+    <script>
         function cancelAppointment(link) {
-            var row = link.closest('tr'); 
-            row.remove(); 
+            var row = link.closest('tr');
+            row.remove();
         }
     </script>
-
 </body>
+
 </html>
