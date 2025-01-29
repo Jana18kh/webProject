@@ -60,6 +60,12 @@ h1 {
   margin-bottom: 10px;
   text-align: center;
 }
+h3 {
+  font-size: 1.5em;
+  color: #2195f3aa;
+  margin-bottom: 10px;
+  text-align: left;
+}
 
 p {
   font-size: 1.2em;
@@ -109,6 +115,7 @@ table,
 th,
 td {
   border: 1px solid #ccc;
+  margin: 1em;
 }
 
 th,
@@ -200,19 +207,19 @@ footer p {
 }
 
 .button:hover {
-    background-color: #1976d2;
-  }
-
-.confirm{
-    font-size: 0.5em;
-  border-radius: 5px;
-    padding: 10px 20px;
-    background-color: #2196f3;
-    text-decoration: none;
+  background-color: #1976d2;
 }
 
-.confirm:hover{
-    background-color: #1976d2;
+.confirm {
+  font-size: 0.5em;
+  border-radius: 5px;
+  padding: 10px 20px;
+  background-color: #2196f3;
+  text-decoration: none;
+}
+
+.confirm:hover {
+  background-color: #1976d2;
 }
 
 p a {
@@ -226,4 +233,20 @@ p a:hover {
 }
 form * {
   padding: 10px 5px;
+}
+
+.doctorHome {
+  display: flex;
+  justify-content: space-between;
+}
+
+.signOut a{
+    color: #f32f21;
+  font-weight: bold;
+}
+
+.signOut{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
