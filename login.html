@@ -6,14 +6,12 @@
     <title>Login Page</title>
     <link rel="stylesheet" href="cccc.css" />
   </head>
-
   <body>
     <header>
       <div class="logo">
         <img src="logo.png" alt="CureGO Logo" />
       </div>
     </header>
-
     <div class="container">
       <h1>Login</h1>
       <form id="loginForm">
@@ -45,7 +43,9 @@
             <option value="doctor">Doctor</option>
           </select>
         </div>
-        <button type="submit" class="button">Login</button>
+        <div class="centerButton">
+          <button type="submit" class="button">Login</button>
+        </div>
       </form>
     </div>
     <footer>
@@ -69,18 +69,13 @@
         </div>
       </div>
     </footer>
-
     <script>
       document
         .getElementById("loginForm")
         .addEventListener("submit", function (event) {
           event.preventDefault();
-
-          // Get the values
           const email = document.getElementById("email").value;
           const role = document.getElementById("role").value;
-
-          // Redirect the user to the appropriate homepage
           if (role === "patient") {
             window.location.href = "patientHomepage.html";
           } else if (role === "doctor") {

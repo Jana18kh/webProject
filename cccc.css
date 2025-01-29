@@ -231,23 +231,59 @@ p a {
 p a:hover {
   text-decoration: underline;
 }
+
 form * {
   padding: 10px 5px;
 }
 
-.doctorHome{
+.doctorHome {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.signOut a{
-    color: #f32f21;
+.signOut a {
+  color: #f32f21;
   font-weight: bold;
 }
 
-.signOut{
+.signOut {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#PatientForm,
+#DoctorForm {
+  display: none;
+}
+
+.userType {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 3em;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+  }
+  
+  .group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .group input, .group select {
+    width: 100%;
+    font-size: 13px;
+  }
+
+  .centerButton{
     display: flex;
     flex-direction: column;
     align-items: center;
-}
+  }
