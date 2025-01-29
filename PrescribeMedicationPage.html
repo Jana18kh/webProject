@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="cccc.css" />
+    <meta charset="UTF-8" />
+    <title>Patient's Medications</title>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="logo.png" alt="CureGO Logo" />
+      </div>
+    </header>
+    <div class="container">
+      <h2>Patient's Medications</h2>
+      <form action="doctorHomepage.html" method="post">
+        <div>
+          <label for="patient-name">Patient's Name:</label>
+          <input type="text" id="patient-name" value="Leena Naser" readonly />
+        </div>
+        <div>
+          <label for="age">Age:</label>
+          <input type="number" id="age" value="40" min="0" />
+        </div>
+        <div>
+          <label>Gender:</label>
+          <div class="gender-options">
+            <label><input type="radio" name="gender" value="male" /> Male</label
+            ><br />
+            <label
+              ><input type="radio" name="gender" value="female" checked />
+              Female</label
+            >
+          </div>
+        </div>
+        <div>
+          <label>Medications:</label>
+          <div>
+            <label
+              ><input type="checkbox" name="medications" value="aspirin" />
+              Aspirin</label
+            ><br />
+            <label
+              ><input type="checkbox" name="medications" value="ibuprofen" />
+              Ibuprofen</label
+            ><br />
+            <label
+              ><input type="checkbox" name="medications" value="paracetamol" />
+              Paracetamol</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="medications"
+                value="antibiotics"
+                checked
+              />
+              Antibiotics</label
+            >
+          </div>
+        </div>
+        <button class="button" type="submit">Submit</button>
+      </form>
+    </div>
+    <footer>
+      <div class="footer-container">
+        <p>Copyright &copy; 2025 CureGo. All rights reserved.</p>
+        <div class="contact-info">
+          <div class="contact-items">
+            <div class="contact-item">
+              <img src="phone.png" alt="Phone Icon" class="icon" />
+              <span>+966111111</span>
+            </div>
+            <div class="contact-item">
+              <img src="telephone2.png" alt="Mobile Icon" class="icon" />
+              <span>+01134657</span>
+            </div>
+            <div class="contact-item">
+              <img src="Email.png" alt="Email Icon" class="icon" />
+              <span>CureGo@gmail.com</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
