@@ -1,94 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Patient's Homepage</title>
-        <link rel="stylesheet" href="cccc.css">
-
-   
-</head>
-
-<body>
-<header>
-<div class="logo">
-            <img src="logo.png" alt="CureGO Logo">
-        </div>
-</header>
+    <link rel="stylesheet" href="cccc.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="logo.png" alt="CureGO Logo" />
+      </div>
+    </header>
     <div class="container">
-        
-        <h2>Welcome Fahad</h2>
-        <p>First name: Fahad</p>
-        <p>Last name: Ahmed</p>
-        <p>ID: 87884</p>
-        <p>Email: Fahad66@hotmail.com</p>
-        <p>Date of Birth: 14/8/1992</p>
-
-        <a href="appointmentBooking.html">Book an appointment</a>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Time</th>
-                    <th>Date</th>
-                    <th>Doctor's Name</th>
-                    <th>Doctor's Photo</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>3 PM</td>
-                    <td>20/5/2025</td>
-                    <td>Dr. Sara Ahmad</td>
-                    <td class="doctorPhoto"><img src="doctor1.jpg" alt="Dr. Sara Ahmad"></td>
-                    <td>Pending</td>
-                    <td><a href="javascript:void(0);" onclick="cancelAppointment(this)">Cancel</a></td>
-                </tr>
-                <tr>
-                    <td>10 AM</td>
-                    <td>14/2/2025</td>
-                    <td>Dr. Saleh Abdullah</td>
-                    <td class="doctorPhoto"><img src="doctor2.jpg" alt="Dr. Saleh Abdullah"></td>
-                    <td>Confirmed</td>
-                    <td><a href="javascript:void(0);" onclick="cancelAppointment(this)">Cancel</a></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <a href="Homepage.html">Sign out</a>
+      <h2>Welcome Fahad</h2>
+      <p>First name: Fahad</p>
+      <p>Last name: Ahmed</p>
+      <p>ID: 87884</p>
+      <p>Email: Fahad66@hotmail.com</p>
+      <p>Date of Birth: 14/8/1992</p>
+      <a href="appointmentBooking.html">Book an appointment</a>
+      <table>
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Date</th>
+            <th>Doctor's Name</th>
+            <th>Doctor's Photo</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>3 PM</td>
+            <td>20/5/2025</td>
+            <td>Dr. Sara Ahmad</td>
+            <td class="doctorPhoto">
+              <img src="doctor1.jpg" alt="Dr. Sara Ahmad" />
+            </td>
+            <td>Pending</td>
+            <td>
+              <a href="javascript:void(0);" onclick="cancelAppointment(this)"
+                >Cancel</a
+              >
+            </td>
+          </tr>
+          <tr>
+            <td>10 AM</td>
+            <td>14/2/2025</td>
+            <td>Dr. Saleh Abdullah</td>
+            <td class="doctorPhoto">
+              <img src="doctor2.jpg" alt="Dr. Saleh Abdullah" />
+            </td>
+            <td>Confirmed</td>
+            <td>
+              <a href="javascript:void(0);" onclick="cancelAppointment(this)"
+                >Cancel</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <a href="Homepage.html">Sign out</a>
     </div>
-
     <footer>
-        <div class="footer-container">
-            <p>Copyright &copy; 2025 CureGo. All rights reserved.</p>
-            <div class="contact-info">
-                <div class="contact-items">
-                    <div class="contact-item">
-                        <img src="phone.png" alt="Phone Icon" class="icon">
-                        <span>+966111111</span>
-                    </div>
-                    <div class="contact-item">
-                        <img src="telephone2.png" alt="Mobile Icon" class="icon">
-                        <span>+01134657</span>
-                    </div>
-                    <div class="contact-item">
-                        <img src="Email.png" alt="Email Icon" class="icon">
-                        <span>CureGo@gmail.com</span>
-                    </div>
-                </div>
+      <div class="footer-container">
+        <p>Copyright &copy; 2025 CureGo. All rights reserved.</p>
+        <div class="contact-info">
+          <div class="contact-items">
+            <div class="contact-item">
+              <img src="phone.png" alt="Phone Icon" class="icon" />
+              <span>+966111111</span>
             </div>
+            <div class="contact-item">
+              <img src="telephone2.png" alt="Mobile Icon" class="icon" />
+              <span>+01134657</span>
+            </div>
+            <div class="contact-item">
+              <img src="Email.png" alt="Email Icon" class="icon" />
+              <span>CureGo@gmail.com</span>
+            </div>
+          </div>
         </div>
+      </div>
     </footer>
-
     <script>
-        function cancelAppointment(link) {
-            var row = link.closest('tr');
-            row.remove();
-        }
+      function cancelAppointment(link) {
+        var row = link.closest("tr");
+        row.remove();
+      }
     </script>
-</body>
-
+  </body>
 </html>
