@@ -135,7 +135,7 @@
         for (let i = 0; i < allStatus.length; i++) {
           if (allStatus[i].textContent.trim() === "pending") {
             allStatus[i].innerHTML =
-              '<button type="button" onclick="confirmStatus(this)">Confirm</button>';
+              '<button class="confirm" type="button" onclick="confirmStatus(this)">Confirm</button>';
           }
         }
       }

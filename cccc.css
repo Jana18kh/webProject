@@ -184,6 +184,7 @@ footer p {
 .contact-item span {
   font-size: 0.9em;
 }
+
 .button {
   display: flex;
   justify-content: center;
@@ -199,7 +200,19 @@ footer p {
 }
 
 .button:hover {
-  background-color: #1976d2;
+    background-color: #1976d2;
+  }
+
+.confirm{
+    font-size: 0.5em;
+  border-radius: 5px;
+    padding: 10px 20px;
+    background-color: #2196f3;
+    text-decoration: none;
+}
+
+.confirm:hover{
+    background-color: #1976d2;
 }
 
 p a {
