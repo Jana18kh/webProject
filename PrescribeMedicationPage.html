@@ -33,13 +33,19 @@
         </div>
         <div>
           <label for="genderOptions">Gender: </label>
-          <input type="radio" name="genderOptions" value="Female" />
-          <label for="female">Female</label>
-          <input type="radio" name="genderOptions" value="male" />
-          <label for="male">Male</label>
+          <div class="row">
+            <div class="group">
+              <input type="radio" name="genderOptions" value="Female" />
+              <label for="female">Female</label>
+            </div>
+            <div class="group">
+              <input type="radio" name="genderOptions" value="male" />
+              <label for="male">Male</label>
+            </div>
+          </div>
         </div>
         <label for="medications">Medications: </label>
-        <div>
+        <div class="row">
           <label
             ><input type="checkbox" name="medications" value="aspirin" />
             Aspirin</label
