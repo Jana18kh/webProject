@@ -30,7 +30,6 @@ header {
   height: 70px;
   font-size: 24px;
   font-weight: bold;
-  color: #1976d2;
 }
 
 .container {
@@ -60,6 +59,7 @@ header {
 h1 {
   position: absolute;
   left: 50%;
+  transform: translateX(-50%);
   font-size: 2.5em;
   font-weight: bold;
   color: #2196f3;
