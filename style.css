@@ -1,7 +1,6 @@
 body * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 html,
@@ -19,16 +18,20 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
 }
 
 header {
+  display: flex;
+  align-items: center;
+  position: relative;
   background-color: #ffff;
   color: white;
   width: 100%;
-  padding: 5px 0;
-  height: 50px;
-  line-height: 50px;
+  padding: 10px 20px ;
+  height: 70px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #1976d2;
 }
 
 .container {
@@ -36,6 +39,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: left;
+  justify-content: center;
   padding: 20px;
   background-color: #ffffff;
   border-radius: 8px;
@@ -45,17 +49,25 @@ header {
 }
 
 .logo {
-  margin-bottom: 20px;
+  flex: 0; 
+  margin-left: 30px;
 }
 
 .logo img {
-  width: 50px;
+  width: 70px;
   height: auto;
 }
-
-h2,
 h1 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); /* Perfect centering */
   font-size: 2.5em;
+  font-weight: bold;
+  color: #2196f3;
+}
+
+h2{
+  font-size: 2.2em;
   color: #2196f3;
   margin-bottom: 10px;
   text-align: center;
@@ -93,13 +105,15 @@ a {
 
 .loginInput input,
 .loginInput select {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
+  width: 90%;
+  font-size: 14px;
   border-radius: 4px;
   border: 1px solid #ccc;
 }
-
+select{
+  height: 30px;
+  font-size: 14px;
+}
 .loginInput input:focus,
 .loginInput select:focus {
   border-color: #4a90e2;
@@ -144,7 +158,7 @@ footer {
   padding: 20px;
 }
 
-.footer-container {
+.footerContainer {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
@@ -155,21 +169,11 @@ footer p {
   font-size: 0.9em;
 }
 
-.copyright {
-  margin: 0;
-  font-size: 1em;
+.contact {
+  margin-bottom: 10px;
 }
 
-.contact-info {
-  margin-top: 5px;
-}
-
-.contact-info p {
-  margin: 0 0 5px;
-  font-size: 0.9em;
-}
-
-.contact-items {
+.contactItems {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -177,18 +181,18 @@ footer p {
   flex-wrap: wrap;
 }
 
-.contact-item {
+.contactItem {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.contact-item img.icon {
+.contactItem img {
   width: 16px;
   height: 16px;
 }
 
-.contact-item span {
+.contactItem span {
   font-size: 0.9em;
 }
 
@@ -266,24 +270,38 @@ form * {
 }
 
 .row {
-    display: flex;
-    justify-content: space-between;
-    gap: 15px;
-  }
-  
-  .group {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .group input, .group select {
-    width: 100%;
-    font-size: 13px;
-  }
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
 
-  .centerButton{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.group input,
+.group select {
+  width: 100%;
+  font-size: 13px;
+}
+
+.centerButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signUp {
+  text-align: center;
+}
+
+textarea {
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #f9f9f9;
+}

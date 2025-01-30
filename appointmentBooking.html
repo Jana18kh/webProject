@@ -11,73 +11,96 @@
       <div class="logo">
         <img src="logo.png" alt="CureGO Logo" />
       </div>
+      <h1>CureGO</h1>
     </header>
     <div class="container">
       <h2>Book an Appointment</h2>
       <form action="" method="" id="specialty">
-        <label for="specialtyOptions">Select Specialty:</label>
-        <select id="specialtyOptions" required>
-          <option value="" disabled>Select Specialty</option>
-          <option value="cardiology">Cardiology</option>
-          <option value="neurology">Neurology</option>
-          <option value="pediatrics">Pediatrics</option>
-          <option value="orthopedics">Orthopedics</option>
-          <option value="dermatology">Dermatology</option>
-          <option value="psychiatry">Psychiatry</option>
-          <option value="oncology">Oncology</option>
-          <option value="gynecology">Gynecology</option>
-        </select>
-        <button class="button" type="submit">Submit</button><br />
+        <div class="row">
+          <div class="group">
+            <label for="specialtyOptions">Select Specialty:</label>
+            <select id="specialtyOptions" required>
+              <option value="" disabled>Select Specialty</option>
+              <option value="cardiology">Cardiology</option>
+              <option value="neurology">Neurology</option>
+              <option value="pediatrics">Pediatrics</option>
+              <option value="orthopedics">Orthopedics</option>
+              <option value="dermatology">Dermatology</option>
+              <option value="psychiatry">Psychiatry</option>
+              <option value="oncology">Oncology</option>
+              <option value="gynecology">Gynecology</option>
+            </select>
+          </div>
+          <div class="group">
+            <button class="button" type="submit">Submit</button>
+          </div>
+        </div>
       </form>
       <form action="" method="" id="appointmentBooking">
-        <label for="doctor">Select Doctor: </label>
-        <select id="doctor" required>
-          <option value="" disabled>Choose Doctor</option>
-        </select>
-        <br /><br />
-        <label for="date">Select Date: </label>
-        <input type="date" name="date" /><br /><br />
-        <label for="time">Select Time: </label>
-        <input type="time" name="time" /><br /><br />
-        <label for="reason"
-          >Reason for Visit: <br /><textarea
-            name="reason"
-            rows="4"
-          ></textarea></label
-        ><br /><br />
-        <button
-          class="button"
-          type="button"
-          onclick="location.href='patientHomepage.html';"
-        >
-          Submit Booking
-        </button>
+        <div class="row">
+          <div class="group">
+            <label for="doctor">Select Doctor: </label>
+            <select id="doctor" required>
+              <option value="" disabled>Select Doctor</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="group">
+            <label for="date">Select Date: </label>
+            <input type="date" name="date" required />
+          </div>
+          <div class="group">
+            <label for="time">Select Time: </label>
+            <input type="time" name="time" required />
+          </div>
+        </div>
+        <div class="row">
+          <div class="group">
+            <label for="reason"
+              >Reason for Visit: <br /><textarea
+                name="reason"
+                rows="4"
+                required
+              ></textarea>
+            </label>
+          </div>
+        </div>
+        <div class="centerButton">
+          <button
+            class="button"
+            type="submit"
+            onclick="location.href='patientHomepage.html';"
+          >
+            Submit Booking
+          </button>
+        </div>
       </form>
     </div>
     <footer>
-      <div class="footer-container">
-        <p>Copyright &copy; 2025 CureGo. All rights reserved.</p>
-        <div class="contact-info">
-          <div class="contact-items">
-            <div class="contact-item">
-              <img src="phone.png" alt="Phone Icon" class="icon" />
+      <div class="footerContainer">
+        <div class="contact">
+          <div class="contactItems">
+            <div class="contactItem">
+              <img src="phone.png" alt="Phone Icon" />
               <span>+966111111</span>
             </div>
-            <div class="contact-item">
-              <img src="telephone2.png" alt="Mobile Icon" class="icon" />
+            <div class="contactItem">
+              <img src="telephone2.png" alt="Mobile Icon" />
               <span>+01134657</span>
             </div>
-            <div class="contact-item">
-              <img src="Email.png" alt="Email Icon" class="icon" />
+            <div class="contactItem">
+              <img src="Email.png" alt="Email Icon" />
               <span>CureGo@gmail.com</span>
             </div>
           </div>
         </div>
+        <p>Copyright &copy; 2025 CureGo. All rights reserved.</p>
       </div>
     </footer>
     <script>
       const specialtyDoctors = {
-        cardiology: ["Dr. Mona", "Dr. Omar", "Dr. Salma"],
+        cardiology: ["Dr. Mona", "Dr. Omar", "Dr. saleh"],
         neurology: ["Dr. Khalid ", "Dr. Hadi", "Dr. Majed"],
         pediatrics: ["Dr. Sami", "Dr. Fatima", "Dr. Ali"],
         orthopedics: ["Dr. Ibrahim", "Dr. Hassan", "Dr. Nasser"],
