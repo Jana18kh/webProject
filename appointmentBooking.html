@@ -117,7 +117,7 @@
       function displayDoctors() {
         const selectedSpecialty =
           document.getElementById("specialtyOptions").value;
-        let doctorOptions = `<option value="" disabled selected>Choose Doctor</option>`;
+        let doctorOptions = `<option value="" disabled selected>Select Doctor</option>`;
         if (specialtyDoctors[selectedSpecialty]) {
           for (let i = 0; i < specialtyDoctors[selectedSpecialty].length; i++) {
             doctorOptions += `<option value="${specialtyDoctors[selectedSpecialty][i]}">${specialtyDoctors[selectedSpecialty][i]}</option>`;

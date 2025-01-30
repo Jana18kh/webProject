@@ -117,7 +117,6 @@
         }
         return 0;
       });
-
       patients.forEach(function (patient) {
         const sorted = `
         <tr>
@@ -125,12 +124,11 @@
           <td>${patient.age}</td>
           <td>${patient.gender}</td>
           <td>${patient.medications}</td>
-          <td><a href="patientM.html">Prescribe</a></td>
+          <td><a href="PrescribeMedicationPage.html">Prescribe</a></td>
         </tr>
       `;
         document.getElementById("patients").innerHTML += sorted;
       });
-
       function status() {
         const allStatus = document.getElementsByClassName("status");
         for (let i = 0; i < allStatus.length; i++) {
@@ -140,11 +138,9 @@
           }
         }
       }
-
       function confirmStatus(button) {
         button.parentElement.textContent = "Confirmed";
       }
-
       window.onload = status;
     </script>
   </body>

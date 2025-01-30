@@ -3,6 +3,7 @@
   <head>
     <link rel="stylesheet" href="style.css" />
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Patient's Medications</title>
   </head>
   <body>
@@ -14,24 +15,31 @@
     </header>
     <div class="container">
       <h2>Patient's Medications</h2>
-      <form action="doctorHomepage.html" method="post">
-        <div>
-          <label for="patient-name">Patient's Name:</label>
-          <input type="text" id="patient-name" value="Leena Naser" readonly />
+      <form action="" method="">
+        <div class="row">
+          <div class="group">
+            <label for="patientName">Patient's Name:</label>
+            <input
+              type="text"
+              id="patientName"
+              name="patientName"
+              value="Leena Naser"
+            />
+          </div>
+          <div class="group">
+            <label for="age">Age:</label>
+            <input type="number" name="age" value="40" min="0" />
+          </div>
         </div>
         <div>
-          <label for="age">Age:</label>
-          <input type="number" id="age" value="40" min="0" />
-        </div>
-        <div>
-          <label>Gender:</label>
-          <div class="gender-options">
-            <label><input type="radio" name="gender" value="male" /> Male</label
-            ><br />
-            <label
-              ><input type="radio" name="gender" value="female" checked />
-              Female</label
-            >
+          <label for="genderOptions">Gender: </label>
+          <div class="group">
+            <label>
+              <input type="radio" name="genderOptions" value="female" /> Female
+            </label>
+            <label>
+              <input type="radio" name="genderOptions" value="male" /> Male
+            </label>
           </div>
         </div>
         <div>
