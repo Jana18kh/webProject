@@ -57,10 +57,10 @@ header {
   width: 70px;
   height: auto;
 }
+
 h1 {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%); /* Perfect centering */
   font-size: 2.5em;
   font-weight: bold;
   color: #2196f3;
@@ -72,6 +72,7 @@ h2{
   margin-bottom: 10px;
   text-align: center;
 }
+
 h3 {
   font-size: 1.5em;
   color: #2195f3aa;
