@@ -33,48 +33,44 @@
         </div>
         <div>
           <label for="genderOptions">Gender: </label>
-          <div class="group">
-            <label>
-              <input type="radio" name="genderOptions" value="female" /> Female
-            </label>
-            <label>
-              <input type="radio" name="genderOptions" value="male" /> Male
-            </label>
-          </div>
+          <input type="radio" name="genderOptions" value="Female" />
+          <label for="female">Female</label>
+          <input type="radio" name="genderOptions" value="male" />
+          <label for="male">Male</label>
         </div>
+        <label for="medications">Medications: </label>
         <div>
-          <label>Medications:</label>
-          <div>
-            <label
-              ><input type="checkbox" name="medications" value="aspirin" />
-              Aspirin</label
-            ><br />
-            <label
-              ><input type="checkbox" name="medications" value="ibuprofen" />
-              Ibuprofen</label
-            ><br />
-            <label
-              ><input type="checkbox" name="medications" value="paracetamol" />
-              Paracetamol</label
-            ><br />
-            <label
-              ><input
-                type="checkbox"
-                name="medications"
-                value="antibiotics"
-                checked
-              />
-              Antibiotics</label
-            >
-          </div>
+          <label
+            ><input type="checkbox" name="medications" value="aspirin" />
+            Aspirin</label
+          >
+          <label
+            ><input type="checkbox" name="medications" value="ibuprofen" />
+            Ibuprofen</label
+          >
+          <label
+            ><input type="checkbox" name="medications" value="paracetamol" />
+            Paracetamol</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              name="medications"
+              value="antibiotics"
+              checked
+            />
+            Antibiotics</label
+          >
         </div>
-        <button
-          class="button"
-          type="button"
-          onclick="location.href='doctorHomepage.html';"
-        >
-          Submit
-        </button>
+        <div class="centerButton">
+          <button
+            class="button"
+            type="button"
+            onclick="location.href='doctorHomepage.html';"
+          >
+            Submit
+          </button>
+        </div>
       </form>
     </div>
     <footer>
