@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Patient's Homepage</title>
     <link rel="stylesheet" href="style.css" />
+   
   </head>
   <body>
     <header>
@@ -14,14 +15,20 @@
       <h1>CureGO</h1>
     </header>
     <div class="container">
-      <h2>Welcome Fahad</h2>
-      <p>First name: Fahad</p>
-      <p>Last name: Ahmed</p>
-      <p>ID: 87884</p>
-      <p>Email: Fahad66@hotmail.com</p>
-      <p>Date of Birth: 14/8/1992</p>
-      <a href="appointmentBooking.html">Book an appointment</a>
-      <table>
+      <h2>Welcome <span id="patientName">Loading...</span></h2>
+      <div class="patient-info">
+        <p>First name: <span id="firstName">Loading...</span></p>
+        <p>Last name: <span id="lastName">Loading...</span></p>
+        <p>ID: <span id="patientId">Loading...</span></p>
+        <p>Email: <span id="patientEmail">Loading...</span></p>
+        <p>Date of Birth: <span id="dob">Loading...</span></p>
+      </div>
+      <a href="appointmentBooking.html" class="book-btn">Book an appointment</a>
+      
+      <h3>Your Appointments</h3>
+      <div id="loadingAppointments" class="loading">Loading appointments...</div>
+      <div id="appointmentsError" class="error-message" style="display: none;"></div>
+      <table id="appointmentsTable">
         <thead>
           <tr>
             <th>Time</th>
@@ -32,37 +39,11 @@
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>3 PM</td>
-            <td>20/5/2025</td>
-            <td>Dr. Sara Ahmad</td>
-            <td class="doctorPhoto">
-              <img src="dr.sara.png" alt="Dr. Sara Ahmad" />
-            </td>
-            <td>Pending</td>
-            <td>
-              <a href="javascript:void(0);" onclick="cancelAppointment(this)"
-                >Cancel</a
-              >
-            </td>
-          </tr>
-          <tr>
-            <td>10 AM</td>
-            <td>14/2/2025</td>
-            <td>Dr. Saleh Abdullah</td>
-            <td class="doctorPhoto">
-              <img src="dr.saleh.png" alt="Dr. Saleh Abdullah" />
-            </td>
-            <td>Confirmed</td>
-            <td>
-              <a href="javascript:void(0);" onclick="cancelAppointment(this)"
-                >Cancel</a
-              >
-            </td>
-          </tr>
+        <tbody id="appointmentsBody">
+          <!-- Appointments will be loaded here dynamically -->
         </tbody>
       </table>
+      
       <div class="signOut">
         <a href="Homepage.html">Sign out</a>
       </div>
@@ -88,10 +69,178 @@
         <p>Copyright &copy; 2025 CureGo. All rights reserved.</p>
       </div>
     </footer>
+    
     <script>
-      function cancelAppointment(link) {
-        var row = link.closest("tr");
-        row.remove();
+      // Global variable to store patient ID
+      let currentPatientId = null;
+      
+      // Load all data when page loads
+      document.addEventListener('DOMContentLoaded', async function() {
+        try {
+          await loadPatientData();
+          await loadAppointments();
+        } catch (error) {
+          console.error("Initialization error:", error);
+        }
+      });
+
+      // Load patient data from server
+      async function loadPatientData() {
+        try {
+          const response = await fetch('getPatientData.php', {
+            credentials: 'include' // Include cookies for session
+          });
+          
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          
+          const data = await response.json();
+          
+          if (data.error) {
+            throw new Error(data.error);
+          }
+          
+          // Update patient info in the DOM
+          document.getElementById('patientName').textContent = data.firstName || 'Not available';
+          document.getElementById('firstName').textContent = data.firstName || 'Not available';
+          document.getElementById('lastName').textContent = data.lastName || 'Not available';
+          document.getElementById('patientId').textContent = data.id || 'Not available';
+          document.getElementById('patientEmail').textContent = data.email || 'Not available';
+          document.getElementById('dob').textContent = data.dob || 'Not available';
+          
+          // Store patient ID for later use
+          currentPatientId = data.id;
+          
+        } catch (error) {
+          console.error("Error loading patient data:", error);
+          document.getElementById('patientName').textContent = "Error loading data";
+          showError('patient-info', "Failed to load patient information. Please refresh the page.");
+        }
+      }
+
+      // Load patient appointments
+      async function loadAppointments() {
+        const loadingElement = document.getElementById('loadingAppointments');
+        const errorElement = document.getElementById('appointmentsError');
+        const tbody = document.getElementById('appointmentsBody');
+        
+        try {
+          // Show loading state
+          loadingElement.style.display = 'block';
+          errorElement.style.display = 'none';
+          tbody.innerHTML = '';
+          
+          const response = await fetch(`getPatientAppointments.php?patientId=${currentPatientId}`, {
+            credentials: 'include'
+          });
+          
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          
+          const appointments = await response.json();
+          
+          if (appointments.error) {
+            throw new Error(appointments.error);
+          }
+          
+          if (appointments.length === 0) {
+            tbody.innerHTML = `
+              <tr>
+                <td colspan="6" style="text-align: center;">No appointments found</td>
+              </tr>
+            `;
+            return;
+          }
+          
+          // Populate appointments table
+          appointments.forEach(appointment => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${formatTime(appointment.time)}</td>
+              <td>${formatDate(appointment.date)}</td>
+              <td>${appointment.doctorName || 'Unknown Doctor'}</td>
+              <td class="doctorPhoto">
+                <img src="${appointment.doctorPhoto || 'default-doctor.jpg'}" 
+                     alt="${appointment.doctorName || 'Doctor'}" />
+              </td>
+              <td>
+                <span class="status-${appointment.status.toLowerCase()}">
+                  ${appointment.status}
+                </span>
+              </td>
+              <td>
+                <a href="javascript:void(0);" 
+                   onclick="cancelAppointment(${appointment.id}, this)"
+                   class="cancel-btn">
+                  Cancel
+                </a>
+              </td>
+            `;
+            tbody.appendChild(row);
+          });
+          
+        } catch (error) {
+          console.error("Error loading appointments:", error);
+          errorElement.textContent = "Failed to load appointments. Please try again later.";
+          errorElement.style.display = 'block';
+          tbody.innerHTML = '';
+        } finally {
+          loadingElement.style.display = 'none';
+        }
+      }
+
+      // Cancel appointment function
+      async function cancelAppointment(appointmentId, linkElement) {
+        if (!confirm('Are you sure you want to cancel this appointment?')) {
+          return;
+        }
+        
+        try {
+          const response = await fetch(`cancelAppointment.php?id=${appointmentId}`, {
+            method: 'DELETE',
+            credentials: 'include'
+          });
+          
+          const data = await response.json();
+          
+          if (!response.ok || !data.success) {
+            throw new Error(data.message || 'Failed to cancel appointment');
+          }
+          
+          // Remove the row from the table
+          linkElement.closest('tr').remove();
+          
+          // Show success message
+          alert('Appointment cancelled successfully');
+          
+        } catch (error) {
+          console.error("Error cancelling appointment:", error);
+          alert(`Error: ${error.message}`);
+        }
+      }
+
+      // Helper function to format date
+      function formatDate(dateString) {
+        if (!dateString) return 'N/A';
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        return new Date(dateString).toLocaleDateString(undefined, options);
+      }
+
+      // Helper function to format time
+      function formatTime(timeString) {
+        if (!timeString) return 'N/A';
+        return timeString.substring(0, 5); // Extract HH:MM
+      }
+
+      // Helper function to show error messages
+      function showError(elementId, message) {
+        const element = document.getElementById(elementId);
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.textContent = message;
+        element.appendChild(errorDiv);
       }
     </script>
   </body>
