@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="logo.png" alt="CureGO Logo" />
+      </div>
+      <h1>CureGO</h1>
+    </header>
+    <div class="container">
+      <h2>Login</h2>
+
+      <!-- Display error if login fails -->
+      <?php if (isset($_GET['error']) && $_GET['error'] == 'invalid') { ?>
+        <div class="error-message" style="color: red;">Invalid login credentials. Please try again.</div>
+      <?php } ?>
+
+      <form id="loginForm" action="login.php" method="POST">
+        <div>
+          <label for="email">Email Address</label>
+          <input type="email" name="email" required placeholder="Enter your email" />
+        </div>
+        <div>
+          <label for="password">Password</label>
+          <input type="password" name="password" required placeholder="Enter your password" />
+        </div>
+        <div>
+          <label for="role">User Role</label>
+          <select id="role" name="role" required>
+            <option value="patient">Patient</option>
+            <option value="doctor">Doctor</option>
+          </select>
+        </div>
+        <div class="centerButton">
+          <button type="submit" class="button">Login</button>
+        </div>
+      </form>
+    </div>
+    <footer>
+      <div class="footerContainer">
+        <div class="contact">
+          <div class="contactItems">
+            <div class="contactItem">
+              <img src="phone.png" alt="Phone Icon" />
+              <span>+966111111</span>
+            </div>
+            <div class="contactItem">
+              <img src="telephone2.png" alt="Mobile Icon" />
+              <span>+01134657</span>
+            </div>
+            <div class="contactItem">
+              <img src="Email.png" alt="Email Icon" />
+              <span>CureGo@gmail.com</span>
+            </div>
+          </div>
+        </div>
+        <p>&copy; 2025 CureGo. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>
