@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>SignUp Page</title>
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <img src="logo.png" alt="CureGO Logo" />
+            </div>
+            <h1>CureGO</h1>
+        </header>
+        <div class="container">
+            <h2>SignUp</h2>
+            <form action="signup_process.php" method="POST">
+                <div class="userType">
+                    <label>
+                        <input type="radio" name="userType" value="Patient" required/> Patient
+                    </label>
+                    <label>
+                        <input type="radio" name="userType" value="Doctor" required /> Doctor
+                    </label>
+                </div>
+            </form>
+            <div>
+                <form id="PatientForm" action="signup_process.php" method="POST">
+                    <input type="hidden" id="userTypePatient" name="userType" value="Patient" />
+                    <div class="row">
+                        <div class="group">
+                            <label for="firstNamePatient">First Name</label>
+                            <input
+                                type="text"
+                                name="firstNamePatient"
+                                placeholder="Enter your first name"
+                                required
+                                />
+                        </div>
+                        <div class="group">
+                            <label for="lastNamePatient">Last Name</label>
+                            <input
+                                type="text"
+                                name="lastNamePatient"
+                                placeholder="Enter your last name"
+                                required
+                                />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="group">
+                            <label for="patientID">ID</label>
+                            <input
+                                type="text"
+                                name="patientID"
+                                placeholder="Enter your ID"
+                                required
+                                />
+                        </div>
+                        <div class="group">
+                            <label for="patientGender">Gender</label>
+                            <select name="patientGender" required>
+                                <option value="" disabled selected>Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div class="group">
+                            <label for="patientDoB">Date of Birth</label>
+                            <input type="date" name="patientDoB" required />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="group">
+                            <label for="patientEmail">Email</label>
+                            <input
+                                type="email"
+                                name="patientEmail"
+                                placeholder="Enter your email"
+                                required
+                                />
+                        </div>
+                        <div class="group">
+                            <label for="patientPassword">Password</label>
+                            <input
+                                type="password"
+                                name="patientPassword"
+                                placeholder="Enter your password"
+                                required
+                                />
+                        </div>
+                    </div>
+                    <div class="centerButton">
+                        <button
+                            type="button"
+                            class="button"
+                            onclick="submitForm('Patient')"
+                            >
+                            SignUp
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div>
+                <form id="DoctorForm" action="signup_process.php" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" id="userTypeDoctor" name="userType" value="Doctor" />
+                    <label for="firstName">First Name</label>
+                    <input type="text" name="firstName" placeholder="Enter your first name" required />
+
+                    <label for="lastName">Last Name</label>
+                    <input type="text" name="lastName" placeholder="Enter your last name" required />
+                    <div class="row">
+                        <div class="group">
+                            <label for="doctorID">ID</label>
+                            <input
+                                type="text"
+                                name="doctorID"
+                                placeholder="Enter your ID"
+                                required
+                                />
+                        </div>
+                        <div class="group">
+                            <label for="photoDoctor">Upload Photo</label>
+                            <input type="file" name="photoDoctor" accept="image/*" required />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="group">
+                            <label for="speciality">Specialty</label>
+                            <select name="speciality" required>
+                                <option value="" disabled selected>Select Speciality</option>
+                                <option value="cardiology">Cardiology</option>
+                                <option value="neurology">Neurology</option>
+                                <option value="pediatrics">Pediatrics</option>
+                                <option value="orthopedics">Orthopedics</option>
+                                <option value="dermatology">Dermatology</option>
+                                <option value="psychiatry">Psychiatry</option>
+                                <option value="oncology">Oncology</option>
+                                <option value="gynecology">Gynecology</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="group">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" placeholder="Enter your email" required />
+
+                        </div>
+                        <div class="group">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" placeholder="Enter your password" required />
+                        </div>
+                    </div>
+                    <div class="centerButton">
+                        <button type="submit" class="button" onclick="submitForm('Doctor')">
+                            SignUp
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <footer>
+            <div class="footerContainer">
+                <div class="contact">
+                    <div class="contactItems">
+                        <div class="contactItem">
+                            <img src="phone.png" alt="Phone Icon" />
+                            <span>+966111111</span>
+                        </div>
+                        <div class="contactItem">
+                            <img src="telephone2.png" alt="Mobile Icon" />
+                            <span>+01134657</span>
+                        </div>
+                        <div class="contactItem">
+                            <img src="Email.png" alt="Email Icon" />
+                            <span>CureGo@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+                <p>Copyright &copy; 2025 CureGo. All rights reserved.</p>
+            </div>
+        </footer>
+        <script>
+            document
+                    .querySelectorAll('input[name="userType"]')
+                    .forEach(function (radio) {
+                        radio.addEventListener("change", function () {
+                            // Toggle visibility of the forms based on user type
+                            document.getElementById("PatientForm").style.display =
+                                    this.value === "Patient" ? "block" : "none";
+                            document.getElementById("DoctorForm").style.display =
+                                    this.value === "Doctor" ? "block" : "none";
+
+                            // Update the hidden input field for userType in the corresponding form
+                            if (this.value === "Patient") {
+                                document.getElementById("userTypePatient").value = "Patient";
+                                document.getElementById("userTypeDoctor").value = ""; // Clear Doctor's userType
+                            } else if (this.value === "Doctor") {
+                                document.getElementById("userTypeDoctor").value = "Doctor";
+                                document.getElementById("userTypePatient").value = ""; // Clear Patient's userType
+                            }
+                        });
+                    });
+
+            function submitForm(userType) {
+                var form;
+                if (userType === "Patient") {
+                    form = document.getElementById("PatientForm");
+                } else if (userType === "Doctor") {
+                    form = document.getElementById("DoctorForm");
+                }
+
+                if (!form) {
+                    alert("Please select whether you are a Patient or a Doctor.");
+                    return;
+                }
+
+                var inputs = form.querySelectorAll("input, select");
+                var isFormValid = true;
+
+                inputs.forEach(function (input) {
+                    if (!input.value) {
+                        isFormValid = false;
+                    }
+                });
+
+                if (isFormValid) {
+                    form.submit(); // Submitting the form to the server
+                }
+            }
+
+
+        </script>
+    </body>
+</html>
