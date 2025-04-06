@@ -2,7 +2,7 @@
 session_start();
 $connection = mysqli_connect("localhost", "root", "", "CureGO");
 if (mysqli_connect_error()) {
-    die("خطأ في الاتصال: " . mysqli_connect_error());
+    die("Connection error: " . mysqli_connect_error());
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["userType"])) {
@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["userType"])) {
     $checkEmail = "SELECT emailAddress FROM $checkTable WHERE emailAddress='$email'";
     $result = mysqli_query($connection, $checkEmail);
     if (mysqli_num_rows($result) > 0) {
-        header("Location: signup.php?error=البريد+الإلكتروني+موجود+بالفعل!");
+        header("Location: signup.php?error=Email+already+exists!");
         exit();
     }
 
@@ -32,15 +32,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["userType"])) {
 
         $allowedExt = array("jpg", "jpeg", "png");
         if (!in_array($fileExt, $allowedExt)) {
-            header("Location: signup.php?error=نوع+الملف+غير+مسموح+به!");
+            header("Location: signup.php?error=File+type+not+allowed!");
             exit();
         } elseif ($file["error"] === UPLOAD_ERR_OK) {
             if (!move_uploaded_file($file["tmp_name"], $uploadPath)) {
-                header("Location: signup.php?error=فشل+في+رفع+الملف!");
+                header("Location: signup.php?error=File+upload+failed!");
                 exit();
             }
         } else {
-            header("Location: signup.php?error=خطأ+في+رفع+الملف!");
+            header("Location: signup.php?error=Error+uploading+file!");
             exit();
         }
     }
@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["userType"])) {
         header("Location: $redirect");
         exit();
     } else {
-        header("Location: signup.php?error=خطأ+في+التسجيل:+" . urlencode(mysqli_error($connection)));
+        header("Location: signup.php?error=Registration+failed:+" . urlencode(mysqli_error($connection)));
         exit();
     }
 }
