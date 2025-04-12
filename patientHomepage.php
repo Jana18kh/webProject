@@ -91,7 +91,7 @@ $conn->close();
             <p>Gender: <b><?php echo $patient['gender']; ?></b></p>
         </div>
 
-        <a href="appointmentBooking.html" class="book-btn">Book an appointment</a>
+        <a href="appointmentBooking.php" class="book-btn">Book an appointment</a>
 
         <h3>Upcoming Appointments</h3>
         <table>
