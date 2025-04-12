@@ -1,10 +1,10 @@
 <?php
+// Start the session
 session_start();
-header('Content-Type: application/json');
 
-// Check if user is logged in
+// Check if user is logged in as a patient
 if (!isset($_SESSION['user_id'])) {
-    echo json_encode(['success' => false, 'message' => 'Unauthorized access']);
+    header("Location: homepage.html");
     exit();
 }
 
@@ -17,59 +17,44 @@ $dbname = "curego";
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
-    echo json_encode(['success' => false, 'message' => 'Database connection failed']);
-    exit();
+    die("Connection failed: " . $conn->connect_error);
 }
 
-$appointmentId = $conn->real_escape_string($_GET['id'] ?? null);
+// Check if the id parameter is set in the URL
+if (isset($_GET['id'])) {
+    $appointment_id = $_GET['id'];
+    $patient_id = $_SESSION['user_id'];
 
-if (!$appointmentId) {
-    echo json_encode(['success' => false, 'message' => 'Appointment ID is required']);
-    $conn->close();
-    exit();
-}
+    // First verify the appointment belongs to the logged-in patient
+    $verify_sql = "SELECT id FROM Appointment WHERE id = ? AND PatientID = ?";
+    $verify_stmt = $conn->prepare($verify_sql);
+    $verify_stmt->bind_param("ii", $appointment_id, $patient_id);
+    $verify_stmt->execute();
+    $verify_result = $verify_stmt->get_result();
 
-try {
-    // Verify the appointment belongs to the current user (either patient or doctor)
-    $userId = $_SESSION['user_id'];
-    $userType = $_SESSION['user_type'] ?? null;
-    
-    $verifySql = "";
-    if ($userType === 'patient') {
-        $verifySql = "SELECT id FROM Appointment WHERE id = ? AND patient_id = ?";
-    } elseif ($userType === 'doctor') {
-        $verifySql = "SELECT id FROM Appointment WHERE id = ? AND doctor_id = ?";
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Invalid user type']);
-        $conn->close();
-        exit();
-    }
-    
-    $verifyStmt = $conn->prepare($verifySql);
-    $verifyStmt->bind_param("ii", $appointmentId, $userId);
-    $verifyStmt->execute();
-    $verifyResult = $verifyStmt->get_result();
-    
-    if ($verifyResult->num_rows === 0) {
-        echo json_encode(['success' => false, 'message' => 'Appointment not found or access denied']);
-        $conn->close();
+    if ($verify_result->num_rows === 0) {
+        // Appointment doesn't belong to this patient or doesn't exist
+        header("Location: patientHomepage.php?error=invalid_appointment");
         exit();
     }
 
-    // Update status to Cancelled instead of deleting (better for records)
-    $updateStmt = $conn->prepare("UPDATE Appointment SET status = 'Cancelled' WHERE id = ?");
-    $updateStmt->bind_param("i", $appointmentId);
-    
-    if ($updateStmt->execute()) {
-        echo json_encode(['success' => true]);
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Failed to cancel appointment']);
-    }
+    // Delete the appointment
+    $delete_sql = "DELETE FROM Appointment WHERE id = ?";
+    $delete_stmt = $conn->prepare($delete_sql);
+    $delete_stmt->bind_param("i", $appointment_id);
 
-} catch (Exception $e) {
-    error_log("Cancel appointment error: " . $e->getMessage());
-    echo json_encode(['success' => false, 'message' => 'An error occurred']);
-} finally {
-    $conn->close();
+    if ($delete_stmt->execute()) {
+        // Success - redirect back with success message
+        header("Location: patientHomepage.php?success=appointment_cancelled");
+    } else {
+        // Error - redirect back with error message
+        header("Location: patientHomepage.php?error=cancel_failed");
+    }
+} else {
+    header("Location: patientHomepage.php?error=invalid_appointment");
 }
+
+// Close the connection
+$conn->close();
+exit();
 ?>
