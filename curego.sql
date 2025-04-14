@@ -111,6 +111,7 @@ CREATE TABLE `Patient` (
 -- Dumping data for table `Patient`
 --
 
+
 INSERT INTO `Patient` (`id`, `firstName`, `lastName`, `gender`, `DoB`, `emailAddress`, `password`) VALUES
 (1, 'Saleh', 'Ahmad', 'Male', '1990-05-15', 'saleh@example.com', '$2a$12$A/szkGeuFokxzmulX3i75OsIZj8mHmb/Err06sIFK633Oh/TBfeQu'),
 (2, 'Omar', 'Ibrahim', 'Male', '1985-08-22', 'omar@example.com', '$2a$12$A/szkGeuFokxzmulX3i75OsIZj8mHmb/Err06sIFK633Oh/TBfeQu'),

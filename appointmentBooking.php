@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             if ($insert_stmt->execute()) {
                 $success_message = "Appointment booked successfully!";
-                // Clear form if needed
+
                 $_POST = array();
             } else {
                 $error_message = "Error booking appointment. Please try again.";
