@@ -48,6 +48,7 @@ if (isset($_GET['id'])) {
         header("Location: patientHomepage.php?success=appointment_cancelled");
     } else {
         // Error - redirect back with error message
+        error_log("Appointment deletion failed: " . $conn->error);
         header("Location: patientHomepage.php?error=cancel_failed");
     }
 } else {
