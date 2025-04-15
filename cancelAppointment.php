@@ -33,13 +33,20 @@ if (isset($_GET['id'])) {
     $verify_result = $verify_stmt->get_result();
     $appointment = $verify_result->fetch_assoc();
 
-    if (!$appointment || !in_array($appointment['status'], ['Pending', 'Confirmed'])) {
-        header("Location: patientHomepage.php?error=invalid_status");
+    if (!$appointment) {
+        header("Location: patientHomepage.php?error=invalid_appointment");
         exit();
     }
 
-    // Delete the appointment
-    $delete_sql = "DELETE FROM Appointment WHERE id = ?";
+    if (!in_array($appointment['status'], ['Pending', 'Confirmed'])) {
+  header("Location: patientHomepage.php?error=invalid_status");
+        exit();
+    }
+
+    // update the appointment status to cancelled
+     $delete_sql = "UPDATE Appointment SET status ='Cancelled' WHERE id = ?";
+
+  //  $delete_sql = "DELETE FROM Appointment WHERE id = ?";
     $delete_stmt = $conn->prepare($delete_sql);
     $delete_stmt->bind_param("i", $appointment_id);
 
