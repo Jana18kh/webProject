@@ -31,10 +31,10 @@ if (isset($_GET['id'])) {
     $verify_stmt->bind_param("ii", $appointment_id, $patient_id);
     $verify_stmt->execute();
     $verify_result = $verify_stmt->get_result();
+    $appointment = $verify_result->fetch_assoc();
 
-    if ($verify_result->num_rows === 0) {
-        // Appointment doesn't belong to this patient or doesn't exist
-        header("Location: patientHomepage.php?error=invalid_appointment");
+    if (!$appointment || !in_array($appointment['status'], ['Pending', 'Confirmed'])) {
+        header("Location: patientHomepage.php?error=invalid_status");
         exit();
     }
 
