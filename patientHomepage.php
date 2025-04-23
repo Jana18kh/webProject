@@ -3,7 +3,7 @@ session_start();
 
 // Check if the user is logged in as a patient
 if (!isset($_SESSION['user_id'])) {
-    header("Location: homepage.html"); // Redirect to homepage if not logged in
+    header("Location: homepage.html");
     exit();
 }
 
@@ -71,8 +71,31 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient's Homepage</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Add some basic styling for notifications */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            color: white;
+            display: none;
+            z-index: 1000;
+        }
+        .success {
+            background-color: #4CAF50;
+        }
+        .error {
+            background-color: #f44336;
+        }
+    </style>
 </head>
 <body>
+    <!-- Notification divs -->
+    <div id="success-notification" class="notification success"></div>
+    <div id="error-notification" class="notification error"></div>
+
     <header>
         <div class="logo">
             <img src="logo.png" alt="CureGO Logo">
@@ -81,20 +104,20 @@ $conn->close();
     </header>
 
     <div class="container">
-        <h2>Welcome <?php echo $patient['firstName']; ?></h2>
+        <h2>Welcome <?php echo htmlspecialchars($patient['firstName']); ?></h2>
         <div class="patient-info">
-            <p>First name: <b><?php echo $patient['firstName']; ?></b></p>
-            <p>Last name: <b><?php echo $patient['lastName']; ?></b></p>
-            <p>Email Address: <b><?php echo $patient['emailAddress']; ?></b></p>
+            <p>First name: <b><?php echo htmlspecialchars($patient['firstName']); ?></b></p>
+            <p>Last name: <b><?php echo htmlspecialchars($patient['lastName']); ?></b></p>
+            <p>Email Address: <b><?php echo htmlspecialchars($patient['emailAddress']); ?></b></p>
             <p>Date of Birth: <b><?php echo date('F j, Y', strtotime($patient['DoB'])); ?></b></p>
             <p>Age: <b><?php echo $age; ?></b></p>
-            <p>Gender: <b><?php echo $patient['gender']; ?></b></p>
+            <p>Gender: <b><?php echo htmlspecialchars($patient['gender']); ?></b></p>
         </div>
 
         <a href="appointmentBooking.php" class="book-btn">Book an appointment</a>
 
         <h3>Upcoming Appointments</h3>
-        <table>
+        <table id="appointments-table">
             <thead>
                 <tr>
                     <th>Date</th>
@@ -108,28 +131,30 @@ $conn->close();
                 </tr>
             </thead>
             <tbody>
-                <?php if ($appointments->num_rows > 0) {
-                    while($row = $appointments->fetch_assoc()) { ?>
-                        <tr>
-                            <td><?php echo $row['date']; ?></td>
+                <?php if ($appointments->num_rows > 0): ?>
+                    <?php while($row = $appointments->fetch_assoc()): ?>
+                        <tr data-appointment-id="<?php echo $row['id']; ?>">
+                            <td><?php echo htmlspecialchars($row['date']); ?></td>
                             <td><?php echo substr($row['time'], 0, 5); ?></td>
-                            <td><?php echo $row['doctor_firstName'] . " " . $row['doctor_lastName']; ?></td>
+                            <td><?php echo htmlspecialchars($row['doctor_firstName'] . " " . $row['doctor_lastName']); ?></td>
                             <td class="doctorPhoto">
-                                <img src="uploads/<?php echo $row['doctor_photo']; ?>" alt="Doctor's Photo">
+                                <img src="uploads/<?php echo htmlspecialchars($row['doctor_photo']); ?>" alt="Doctor's Photo">
                             </td>
-                            <td><?php echo $row['speciality']; ?></td>
-                            <td><?php echo $row['reason']; ?></td>
-                            <td><?php echo $row['status']; ?></td>
+                            <td><?php echo htmlspecialchars($row['speciality']); ?></td>
+                            <td><?php echo htmlspecialchars($row['reason']); ?></td>
+                            <td><?php echo htmlspecialchars($row['status']); ?></td>
                             <td>
-                                <?php if ($row['status'] == 'Pending' || $row['status'] == 'Confirmed') { ?>
-                                    <a href="cancelappointment.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to cancel this appointment?')">Cancel</a>
-                                <?php } ?>
+                                <?php if ($row['status'] == 'Pending' || $row['status'] == 'Confirmed'): ?>
+                                    <a href="#" class="cancel-btn" onclick="cancelAppointment(<?php echo $row['id']; ?>); return false;">Cancel</a>
+                                <?php endif; ?>
                             </td>
                         </tr>
-                    <?php } 
-                } else { 
-                    echo "<tr><td colspan='8'>No upcoming appointments.</td></tr>";
-                } ?>
+                    <?php endwhile; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="8">No upcoming appointments.</td>
+                    </tr>
+                <?php endif; ?>
             </tbody>
         </table>
 
@@ -145,19 +170,21 @@ $conn->close();
                 </tr>
             </thead>
             <tbody>
-                <?php if ($history->num_rows > 0) {
-                    while($row = $history->fetch_assoc()) { ?>
+                <?php if ($history->num_rows > 0): ?>
+                    <?php while($row = $history->fetch_assoc()): ?>
                         <tr>
-                            <td><?php echo $row['date']; ?></td>
+                            <td><?php echo htmlspecialchars($row['date']); ?></td>
                             <td><?php echo substr($row['time'], 0, 5); ?></td>
-                            <td><?php echo $row['doctor_name']; ?></td>
-                            <td><?php echo $row['speciality']; ?></td>
-                            <td><?php echo $row['medications'] ? $row['medications'] : 'None'; ?></td>
+                            <td><?php echo htmlspecialchars($row['doctor_name']); ?></td>
+                            <td><?php echo htmlspecialchars($row['speciality']); ?></td>
+                            <td><?php echo $row['medications'] ? htmlspecialchars($row['medications']) : 'None'; ?></td>
                         </tr>
-                    <?php } 
-                } else { 
-                    echo "<tr><td colspan='5'>No appointment history.</td></tr>";
-                } ?>
+                    <?php endwhile; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="5">No appointment history.</td>
+                    </tr>
+                <?php endif; ?>
             </tbody>
         </table>
 
@@ -187,5 +214,75 @@ $conn->close();
             <p>&copy; 2025 CureGo. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        function showNotification(type, message) {
+            const notification = document.getElementById(`${type}-notification`);
+            notification.textContent = message;
+            notification.style.display = 'block';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        function cancelAppointment(appointmentId) {
+            if (confirm('Are you sure you want to cancel this appointment?')) {
+                // Show loading state
+                const cancelBtn = document.querySelector(`tr[data-appointment-id="${appointmentId}"] .cancel-btn`);
+                if (cancelBtn) {
+                    cancelBtn.textContent = 'Cancelling...';
+                    cancelBtn.style.pointerEvents = 'none';
+                }
+                
+                // Create a form data object
+                const formData = new FormData();
+                formData.append('id', appointmentId);
+                
+                // Send AJAX request
+                fetch('cancelappointment.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        // Find and remove the table row
+                        const row = document.querySelector(`tr[data-appointment-id="${appointmentId}"]`);
+                        if (row) {
+                            row.remove();
+                        }
+                        
+                        // Check if table is empty now
+                        const tbody = document.querySelector('#appointments-table tbody');
+                        if (tbody.children.length === 0) {
+                            tbody.innerHTML = '<tr><td colspan="8">No upcoming appointments.</td></tr>';
+                        }
+                        
+                        showNotification('success', 'Appointment cancelled successfully');
+                    } else {
+                        showNotification('error', 'Failed to cancel appointment: ' + (data.error || 'Unknown error'));
+                        if (cancelBtn) {
+                            cancelBtn.textContent = 'Cancel';
+                            cancelBtn.style.pointerEvents = 'auto';
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showNotification('error', 'An error occurred while cancelling the appointment');
+                    if (cancelBtn) {
+                        cancelBtn.textContent = 'Cancel';
+                        cancelBtn.style.pointerEvents = 'auto';
+                    }
+                });
+            }
+        }
+    </script>
 </body>
 </html>
