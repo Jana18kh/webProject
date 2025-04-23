@@ -8,10 +8,10 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Database connection
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "curego";
+$servername = "sql110.infinityfree.com";
+$username = "if0_ 38793190";
+$password = "VZrJJdHAmkIV";
+$dbname = "ifO_38793190_curego";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
