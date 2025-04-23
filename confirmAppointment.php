@@ -3,10 +3,10 @@
 session_start();
 
 // Database connection
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "curego";
+$servername = "sql110.infinityfree.com";
+$username = "if0_38818376";
+$password = "VZrJJdHAmkIV";
+$dbname = "if0_38818376_curego";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
