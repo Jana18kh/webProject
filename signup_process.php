@@ -6,10 +6,10 @@ error_reporting(E_ALL);
 $message = "";  // To store any error or success message
 
 // Database connection (direct in this file)
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "curego";
+$servername = "sql110.infinityfree.com";
+$username = "if0_38818376";
+$password = "VZrJJdHAmkIV";
+$dbname = "if0_38818376_curego";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
