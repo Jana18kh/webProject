@@ -1,11 +1,11 @@
 <?php
-
 // Start the session
 session_start();
 
 // Check if user is logged in as a patient
 if (!isset($_SESSION['user_id'])) {
-    header("Location: homepage.html");
+    header('Content-Type: application/json');
+    echo json_encode(['success' => false, 'error' => 'not_logged_in']);
     exit();
 }
 
@@ -18,12 +18,14 @@ $dbname = "curego";
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    header('Content-Type: application/json');
+    echo json_encode(['success' => false, 'error' => 'db_connection_failed']);
+    exit();
 }
 
-// Check if the id parameter is set in the URL
-if (isset($_GET['id'])) {
-    $appointment_id = $_GET['id'];
+// Check if the id parameter is set in the POST data
+if (isset($_POST['id'])) {
+    $appointment_id = $_POST['id'];
     $patient_id = $_SESSION['user_id'];
 
     // First verify the appointment belongs to the logged-in patient
@@ -35,7 +37,8 @@ if (isset($_GET['id'])) {
     $appointment = $verify_result->fetch_assoc();
 
     if (!$appointment || !in_array($appointment['status'], ['Pending', 'Confirmed'])) {
-        header("Location: patientHomepage.php?error=invalid_status");
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false, 'error' => 'invalid_status']);
         exit();
     }
 
@@ -51,14 +54,15 @@ if (isset($_GET['id'])) {
     $delete_stmt->bind_param("i", $appointment_id);
 
     if ($delete_stmt->execute()) {
-        // Success - redirect back with success message
-        header("Location: patientHomepage.php?success=appointment_cancelled");
+        header('Content-Type: application/json');
+        echo json_encode(['success' => true]);
     } else {
-        // Error - redirect back with error message
-        header("Location: patientHomepage.php?error=cancel_failed");
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false, 'error' => 'delete_failed']);
     }
 } else {
-    header("Location: patientHomepage.php?error=invalid_appointment");
+    header('Content-Type: application/json');
+    echo json_encode(['success' => false, 'error' => 'invalid_appointment']);
 }
 
 // Close the connection
