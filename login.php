@@ -3,7 +3,7 @@
 session_start();
 
 // Database connection
-$connection = mysqli_connect("sql110.infinityfree.com", "if0_38818376", "zWf9MgaDKqcc", "if0_38818376_curego");
+$connection = mysqli_connect("localhost", "root", "root", "root");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = mysqli_real_escape_string($connection, $_POST["email"]);

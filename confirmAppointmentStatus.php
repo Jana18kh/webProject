@@ -2,10 +2,10 @@
 // Start the session and database connection
 session_start();
 
-$servername = "sql110.infinityfree.com";  // Hostname
-$username = "if0_38818376";              // Username
-$password = "zWf9MgaDKqcc";               // Password
-$dbname = "if0_38818376_curego";         // Database name
+$servername = "localhost";  // Hostname
+$username = "root";              // Username
+$password = "root";               // Password
+$dbname = "curego";         // Database name
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
