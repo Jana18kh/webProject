@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id']) & $_SESSION['role'] == 'doctor') {
 
 $servername = "sql110.infinityfree.com";  // Hostname
 $username = "if0_38818376";              // Username
-$password = "VZrJJdHAmkIV";               // Password
+$password = "zWf9MgaDKqcc";               // Password
 $dbname = "if0_38818376_curego";         // Database name
 
 $conn = new mysqli($servername, $username, $password, $dbname);
