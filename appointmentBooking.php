@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['user_id'])) {
+    header("Location: homepage.html");
+    exit();
+}
+
 $servername = "localhost";
 $username = "root";
 $password = "root";
@@ -60,49 +65,107 @@ $time_slots[] = "17:00";
 
 $conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Appointment | CureGO</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>Book a New Appointment</h2>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="CureGO Logo">
+        </div>
+        <h1>CureGO</h1>
+    </header>
 
-    <?php if ($success_message): ?><div><?php echo $success_message; ?></div><?php endif; ?>
-    <?php if ($error_message): ?><div><?php echo $error_message; ?></div><?php endif; ?>
+    <div class="container">
+        <h2>Book a New Appointment</h2>
+        
+        <?php if ($success_message): ?>
+            <div class="message success"><?php echo $success_message; ?></div>
+        <?php endif; ?>
+        
+        <?php if ($error_message): ?>
+            <div class="message error"><?php echo $error_message; ?></div>
+        <?php endif; ?>
 
-    <form method="POST" action="appointmentBooking.php">
-        <label for="speciality">Select Speciality:</label>
-        <select id="speciality" required>
-            <option value="">-- Select Speciality --</option>
-            <?php while($row = mysqli_fetch_assoc($specialties)): ?>
-                <option value="<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['speciality']); ?></option>
-            <?php endwhile; ?>
-        </select>
+        <div class="booking-form">
+            <form method="POST" action="appointmentBooking.php">
+                <div class="form-group">
+                    <label for="speciality">Select Speciality:</label>
+                    <select id="speciality" required>
+                        <option value="">-- Select Speciality --</option>
+                        <?php while($row = mysqli_fetch_assoc($specialties)): ?>
+                            <option value="<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['speciality']); ?></option>
+                        <?php endwhile; ?>
+                    </select>
+                </div>
 
-        <label for="doctor">Select Doctor:</label>
-        <select id="doctor" name="doctor" required>
-            <option value="">-- Select a Doctor --</option>
-        </select>
+                <div class="form-group">
+                    <label for="doctor">Select Doctor:</label>
+                    <select id="doctor" name="doctor" required>
+                        <option value="">-- Select a Doctor --</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="date">Appointment Date:</label>
+                    <input type="date" id="date" name="date" 
+                           min="<?php echo date('Y-m-d'); ?>" 
+                           value="<?php echo isset($_POST['date']) ? $_POST['date'] : ''; ?>" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="time">Appointment Time:</label>
+                    <select id="time" name="time" required>
+                        <option value="">-- Select a Time --</option>
+                        <?php foreach ($time_slots as $slot): ?>
+                            <option value="<?php echo $slot; ?>" 
+                                <?php if (isset($_POST['time']) && $_POST['time'] == $slot) echo 'selected'; ?>>
+                                <?php echo $slot; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reason">Reason for Visit:</label>
+                    <textarea id="reason" name="reason" required><?php echo isset($_POST['reason']) ? htmlspecialchars($_POST['reason']) : ''; ?></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="submit-btn">Book Appointment</button>
+                    <a href="patientHomepage.php" class="cancel-btn">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
 
-        <label for="date">Appointment Date:</label>
-        <input type="date" id="date" name="date" min="<?php echo date('Y-m-d'); ?>" required>
-
-        <label for="time">Appointment Time:</label>
-        <select id="time" name="time" required>
-            <option value="">-- Select a Time --</option>
-            <?php foreach ($time_slots as $slot): ?>
-                <option value="<?php echo $slot; ?>"><?php echo $slot; ?></option>
-            <?php endforeach; ?>
-        </select>
-
-        <label for="reason">Reason for Visit:</label>
-        <textarea id="reason" name="reason" rows="4" required></textarea>
-
-        <button type="submit">Book Appointment</button>
-    </form>
+    <footer>
+        <div class="footerContainer">
+            <div class="contact">
+                <div class="contactItems">
+                    <div class="contactItem">
+                        <img src="phone.png" alt="Phone Icon">
+                        <span>+966111111</span>
+                    </div>
+                    <div class="contactItem">
+                        <img src="telephone2.png" alt="Mobile Icon">
+                        <span>+01134657</span>
+                    </div>
+                    <div class="contactItem">
+                        <img src="Email.png" alt="Email Icon">
+                        <span>CureGo@gmail.com</span>
+                    </div>
+                </div>
+            </div>
+            <p>&copy; 2025 CureGo. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
@@ -110,7 +173,6 @@ $conn->close();
         $('#speciality').change(function(){
             var specialityID = $(this).val();
             $('#doctor').empty().append('<option value="">-- Select a Doctor --</option>');
-
             if (specialityID) {
                 $.ajax({
                     url: 'getDoctorsBySpeciality.php',
@@ -129,4 +191,5 @@ $conn->close();
     </script>
 </body>
 </html>
+
 
