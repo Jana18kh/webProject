@@ -8,7 +8,7 @@ $message = "";  // To store any error or success message
 // Database connection (direct in this file)
 $servername = "sql110.infinityfree.com";
 $username = "if0_38818376";
-$password = "VZrJJdHAmkIV";
+$password = "zWf9MgaDKqcc";
 $dbname = "if0_38818376_curego";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
