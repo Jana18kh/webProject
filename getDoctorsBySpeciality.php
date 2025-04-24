@@ -24,3 +24,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["speciality_id"])) {
 
 $conn->close();
 ?>
+ 
